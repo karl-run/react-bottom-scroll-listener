@@ -1,0 +1,69 @@
+{
+  "name": "react-bottom-scroll-listener",
+  "version": "0.0.1",
+  "description": "Sample project for packages built using rollup with configuration for React, JSX and postCSS. jest, jsdom and enzyme for tests.",
+  "main": "dist/react-bottom-scroll-listener.js",
+  "scripts": {
+    "prebuild": "yarn lint",
+    "build": "rollup -c --environment BUILD:production",
+    "watch": "rollup -c -w",
+    "pretest": "rollup -c",
+    "test": "jest",
+    "lint": "eslint lib test",
+    "prepublish": "yarn lint && yarn test"
+  },
+  "jest": {
+    "transform": {
+      ".*": "<rootDir>/node_modules/jest-css-modules"
+    }
+  },
+  "repository": "karl-run/react-bottom-scroll-listener",
+  "keywords": [
+    "react",
+    "scrolling",
+    "bottom",
+    "listener",
+    "callback"
+  ],
+  "author": "Karl J. Overå",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/karl-run/react-bottom-scroll-listener/issues"
+  },
+  "files": [
+    "lib",
+    "dist"
+  ],
+  "homepage": "https://github.com/karl-run/react-bottom-scroll-listener#readme",
+  "dependencies": {
+    "lodash.debounce": "^4.0.8",
+    "prop-types": "^15.5.10",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.1.1",
+    "babel-plugin-external-helpers": "^6.18.0",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-register": "^6.18.0",
+    "babelrc-rollup": "^3.0.0",
+    "enzyme": "^2.9.0",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^15.0.1",
+    "eslint-plugin-import": "^2.5.0",
+    "eslint-plugin-jsx-a11y": "^5.0.3",
+    "eslint-plugin-react": "^7.1.0",
+    "jest": "^20.0.4",
+    "jest-css-modules": "^1.1.0",
+    "jsdom": "^11.0.0",
+    "mocha": "^3.2.0",
+    "react-test-renderer": "^15.6.1",
+    "rollup": "^0.45.0",
+    "rollup-plugin-babel": "^2.7.1",
+    "rollup-plugin-css-only": "^0.2.0",
+    "rollup-plugin-postcss": "^0.5.3",
+    "rollup-watch": "^4.0.0"
+  }
+}
