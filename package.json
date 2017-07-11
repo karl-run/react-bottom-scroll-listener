@@ -1,6 +1,6 @@
 {
   "name": "react-bottom-scroll-listener",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Sample project for packages built using rollup with configuration for React, JSX and postCSS. jest, jsdom and enzyme for tests.",
   "main": "dist/react-bottom-scroll-listener.js",
   "scripts": {
