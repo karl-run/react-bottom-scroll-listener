@@ -1,7 +1,7 @@
 {
   "name": "react-bottom-scroll-listener",
   "version": "1.0.1",
-  "description": "Sample project for packages built using rollup with configuration for React, JSX and postCSS. jest, jsdom and enzyme for tests.",
+  "description": "A simple React component that lets you listen for when you have scrolled to the bottom.",
   "main": "dist/react-bottom-scroll-listener.js",
   "scripts": {
     "prebuild": "yarn lint",
