@@ -1,6 +1,6 @@
 {
   "name": "react-bottom-scroll-listener",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "A simple React component that lets you listen for when you have scrolled to the bottom.",
   "main": "dist/react-bottom-scroll-listener.js",
   "scripts": {
