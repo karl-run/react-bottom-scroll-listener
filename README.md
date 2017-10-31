@@ -13,7 +13,7 @@ yarn:
 ## Usage
 
 ```
-<BottomScrollListener onbottom={callback} />
+<BottomScrollListener onBottom={callback} />
 ```
 __Props__
 
