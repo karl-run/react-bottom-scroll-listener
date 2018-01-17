@@ -5,7 +5,7 @@ A simple React component that lets you listen for when you have scrolled to the 
 ## Installation
 
 npm:
-`npm install --save react-bottom-scroll-listener`
+`npm install react-bottom-scroll-listener`
 
 yarn:
 `yarn add react-bottom-scroll-listener`

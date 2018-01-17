@@ -1,7 +1,10 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import Enzyme, { shallow } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 
 import BottomScrollListener from '../lib/index';
+
+Enzyme.configure({ adapter: new Adapter() });
 
 describe('Hello component', () => {
   it('Should not render anything if there are no children', () => {

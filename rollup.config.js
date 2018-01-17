@@ -1,33 +1,56 @@
 import babel from 'rollup-plugin-babel';
 import babelrc from 'babelrc-rollup';
-import postcss from 'rollup-plugin-postcss';
+import resolve from 'rollup-plugin-node-resolve';
+import commonjs from 'rollup-plugin-commonjs';
 
-const pkg = require('./package.json');
+import pkg from './package.json';
 
-const external = Object.keys(pkg.dependencies);
-
-const plugins = [
-  postcss({
-    extensions: ['.css', '.sss'],
-  }),
-  babel(babelrc()),
+const commonPlugins = [
+  babel(babelrc())
 ];
 
-export default {
-  entry: 'lib/index.js',
-  plugins,
-  external,
-  globals: {
-    react: 'React',
-    'prop-types': 'PropTypes',
-    'lodash.debounce': 'debounce',
-  },
-  targets: [
-    {
-      dest: pkg.main,
+const external = ['react', 'react-dom', 'prop-types', 'lodash.debounce'];
+
+export default [
+  {
+    // browser-friendly UMD build
+    input: 'lib/index.js',
+    external: external,
+    output: {
+      name: 'reactBottomScrollListener',
+      file: pkg.browser,
       format: 'umd',
-      moduleName: 'reactBottomScrollListener',
-      sourceMap: true,
+      globals: {
+        react: 'React',
+        'prop-types': 'PropTypes',
+        'lodash.debounce': 'debounce'
+      }
     },
-  ],
-};
+    plugins: [
+      ...commonPlugins,
+      resolve(), // so Rollup can find `ms`
+      commonjs() // so Rollup can convert `ms` to an ES module
+    ]
+  },
+
+  // CommonJS (for Node) and ES module (for bundlers) build.
+  // (We could have three entries in the configuration array
+  // instead of two, but it's quicker to generate multiple
+  // builds from a single configuration where possible, using
+  // the `targets` option which can specify `file` and `format`)
+  {
+    input: 'lib/index.js',
+    external: external,
+    plugins: commonPlugins,
+    output: [
+      {
+        file: pkg.main,
+        format: 'cjs'
+      },
+      {
+        file: pkg.module,
+        format: 'es'
+      }
+    ]
+  }
+];
