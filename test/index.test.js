@@ -41,4 +41,18 @@ describe('Hello component', () => {
 
     documentSpy.mockRestore();
   });
+
+  it('Should use lodash.debounce when debounce is more than 0', () => {
+    const wrapper = shallow(<BottomScrollListener debounce={200} onBottom={() => {}} />);
+    const functionName = wrapper.instance().handleOnScroll.name;
+
+    expect(functionName).toEqual('debounced');
+  });
+
+  it('Should not use lodash.debounce when debounce is 0', () => {
+    const wrapper = shallow(<BottomScrollListener debounce={0} onBottom={() => {}} />);
+    const functionName = wrapper.instance().handleOnScroll.name;
+
+    expect(functionName).toEqual('bound handleOnScroll');
+  });
 });
