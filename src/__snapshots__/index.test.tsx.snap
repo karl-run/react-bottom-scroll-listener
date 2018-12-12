@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Hello component Should not render anything if there are no children 1`] = `""`;
+
+exports[`Hello component Should render children 1`] = `
+<button>
+  hello
+</button>
+`;
