@@ -4,7 +4,7 @@ import BottomScrollListerer from 'react-bottom-scroll-listener'
 
 export default class App extends Component {
   state = {
-    alertOnBottom: false,
+    alertOnBottom: true,
   }
 
   handleToggleAlertOnBottom = () => {
@@ -21,7 +21,7 @@ export default class App extends Component {
 
   render() {
     return (
-      <div>
+      <div className="root">
         <label htmlFor="alertToggle">
           <input
             id="alertToggle"
@@ -29,10 +29,14 @@ export default class App extends Component {
             checked={this.state.alertOnBottom}
             onChange={this.handleToggleAlertOnBottom}
           />
-          Show alert on bottom
+          <div>Show alert on bottom</div>
         </label>
         <BottomScrollListerer onBottom={this.handleOnBottom}>
-          <div style={{ height: '2000px', backgroundColor: 'palevioletred' }}>Scroll down!</div>
+          <div className="scrollbox">
+            <div>Scroll down! ▼▼▼</div>
+            <div>A bit more... ▼▼</div>
+            <div>Almost there... ▼</div>
+          </div>
         </BottomScrollListerer>
       </div>
     )

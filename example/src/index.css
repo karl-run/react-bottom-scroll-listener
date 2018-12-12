@@ -3,3 +3,31 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.root {
+  background-color: paleturquoise;
+}
+
+.root > label > input {
+  margin: 8px;
+  height: 24px;
+  width: 24px;
+}
+
+.root > label {
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.scrollbox {
+  margin: 16px;
+  padding: 8px;
+  height: 1500px;
+  color: white;
+  background-color: palevioletred;
+}
+
+.scrollbox > div {
+  margin-bottom: 500px;
+}
