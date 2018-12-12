@@ -1,6 +1,8 @@
-# react-bottom-scroll-listener [![NPM version](https://img.shields.io/npm/v/react-bottom-scroll-listener.svg?style=flat)](https://www.npmjs.com/package/react-bottom-scroll-listener) ![Gzipped size](https://img.shields.io/badge/gzipped-2.1kb-brightgreen.png)
+# react-bottom-scroll-listener [![NPM version](https://img.shields.io/npm/v/react-bottom-scroll-listener.svg?style=flat)](https://www.npmjs.com/package/react-bottom-scroll-listener)  [![npm bundle size (minified)](https://img.shields.io/bundlephobia/minzip/react-bottom-scroll-listener.svg)](https://github.com/karl-run/react-bottom-scroll-listener)
 
 A simple React component that lets you listen for when you have scrolled to the bottom.
+
+![Example](./example.gif)
 
 ## Installation
 
