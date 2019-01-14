@@ -31,13 +31,13 @@ export default class App extends Component {
           />
           <div>Show alert on bottom</div>
         </label>
-        <BottomScrollListerer onBottom={this.handleOnBottom}>
+        <BottomScrollListener onBottom={this.handleOnBottom}>
           <div className="scrollbox">
             <div>Scroll down! ▼▼▼</div>
             <div>A bit more... ▼▼</div>
             <div>Almost there... ▼</div>
           </div>
-        </BottomScrollListerer>
+        </BottomScrollListener>
       </div>
     )
   }
