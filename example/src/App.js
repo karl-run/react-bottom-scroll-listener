@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import BottomScrollListerer from 'react-bottom-scroll-listener'
+import BottomScrollListener from 'react-bottom-scroll-listener'
 
 export default class App extends Component {
   state = {
