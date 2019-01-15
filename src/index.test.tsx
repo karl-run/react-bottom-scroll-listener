@@ -1,5 +1,5 @@
 import React from 'react'
-import Enzyme, { shallow } from 'enzyme'
+import Enzyme, { shallow, mount } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 
 import BottomScrollListener from './index'
@@ -53,11 +53,73 @@ describe('Bottom Scroll Listener', () => {
       const documentSpy = jest.spyOn(document, 'removeEventListener')
       const wrapper = shallow(<BottomScrollListener onBottom={() => {}} />)
 
-      wrapper.instance().componentWillUnmount()
+      wrapper.unmount()
 
       expect(documentSpy).toHaveBeenCalledWith('scroll', expect.any(Function))
 
       documentSpy.mockRestore()
+    })
+  })
+
+  describe('in optional specific container mode', () => {
+    it('shall render children', () => {
+      const wrapper = mount(
+        <BottomScrollListener onBottom={() => {}}>{ref => <button ref={ref}>hello</button>}</BottomScrollListener>,
+      )
+
+      expect(wrapper).toMatchSnapshot()
+    })
+
+    describe('error handling', () => {
+      let originalError: Function
+      beforeAll(() => {
+        originalError = console.error
+        console.error = () => {}
+      })
+
+      afterAll(() => {
+        console.error = originalError
+      })
+
+      it('shall not throw error if ref is properly passed to a child on mount', () => {
+        const mountComponent = () =>
+          mount(<BottomScrollListener onBottom={() => {}}>{ref => <div ref={ref}>Test div</div>}</BottomScrollListener>)
+
+        expect(mountComponent).not.toThrowError()
+      })
+
+      it('shall throw error if ref is not passed to a child on mount', () => {
+        const mountComponent = () =>
+          mount(<BottomScrollListener onBottom={() => {}}>{() => <div>Test div</div>}</BottomScrollListener>)
+
+        expect(mountComponent).toThrowErrorMatchingSnapshot()
+      })
+
+      it('shall not throw error if ref is present when component unmounts', () => {
+        const wrapper = mount(
+          <BottomScrollListener onBottom={() => {}}>{ref => <div ref={ref}>Test div</div>}</BottomScrollListener>,
+        )
+
+        const unmountComponent = () => {
+          wrapper.unmount()
+        }
+
+        expect(unmountComponent).not.toThrowError()
+      })
+
+      it('shall throw error if ref is not present when component unmounts', () => {
+        const wrapper = mount(
+          <BottomScrollListener onBottom={() => {}}>{ref => <div ref={ref}>Test div</div>}</BottomScrollListener>,
+        )
+
+        wrapper.instance().optionalScrollContainerRef.current = null
+
+        const unmountComponent = () => {
+          wrapper.unmount()
+        }
+
+        expect(unmountComponent).toThrowErrorMatchingSnapshot()
+      })
     })
   })
 })
