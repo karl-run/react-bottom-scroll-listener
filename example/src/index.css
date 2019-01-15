@@ -27,3 +27,18 @@ body {
 .scrollbox > div {
   margin-bottom: 500px;
 }
+
+.innerScrollExample {
+  padding: 8px;
+  position: absolute;
+  right: 42px;
+  top: 84px;
+  height: 200px;
+  width: 200px;
+  background-color: darkgreen;
+  overflow: auto;
+}
+
+.innerScrollExample > div {
+  margin-bottom: 150px;
+}
