@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Hello component Should not render anything if there are no children 1`] = `""`;
-
-exports[`Hello component Should render children 1`] = `
+exports[`Bottom Scroll Listener in normal body scroll mode shall render children 1`] = `
 <button>
   hello
 </button>
 `;
+
+exports[`Bottom Scroll Listener shall not render anything if there are no children 1`] = `""`;
