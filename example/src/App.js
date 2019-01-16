@@ -40,8 +40,8 @@ export default class App extends Component {
           <div>Show alert on bottom</div>
         </label>
         <BottomScrollListener onBottom={this.handleContainerOnBottom}>
-          {ref => (
-            <div ref={ref} className="innerScrollExample">
+          {scrollRef => (
+            <div ref={scrollRef} className="innerScrollExample">
               <h4>Callback when this container hits bottom</h4>
               <div>Scroll down! ▼▼▼</div>
               <div>A bit more... ▼▼</div>

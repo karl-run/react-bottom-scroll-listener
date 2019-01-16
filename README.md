@@ -24,13 +24,13 @@ Simply have the BottomScrollListener anywhere in your application and pass it a 
 
 ### On bottom of specific container
 
-Pass the BottomScrollListener a function inside the JSX_tag, receive the `ref` in this function from the BottomScrollListener
+Pass the BottomScrollListener a function inside the JSX_tag, receive the `scrollRef` in this function from the BottomScrollListener
 and pass it to the component you want to listen for a scroll event on.
 
 ```
 <BottomScrollListener onBottom={callback}>
-  {ref => (
-    <div ref={ref}>
+  {scrollRef => (
+    <div ref={scrollRef}>
       Callback will be invoked when this container is scrolled to bottom.
     </div>
   )}
