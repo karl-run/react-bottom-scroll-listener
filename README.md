@@ -2,7 +2,14 @@
 
 A simple React component that lets you listen for when you have scrolled to the bottom.
 
+### Window
+
 ![Example](./example.gif)
+
+
+### Container 
+
+![Example](./example_inner.gif)
 
 ## Installation
 
