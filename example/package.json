@@ -9,7 +9,8 @@
     "react": "^16.4.1",
     "react-bottom-scroll-listener": "link:..",
     "react-dom": "^16.4.1",
-    "react-scripts": "^1.1.4"
+    "react-scripts": "^1.1.4",
+    "react-toggle": "^4.0.2"
   },
   "scripts": {
     "start": "react-scripts start",
