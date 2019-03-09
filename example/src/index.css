@@ -100,7 +100,7 @@ header label span {
     font-size: 16px;
   }
 
-  header label > span {
+  header label {
     display: none;
   }
 
