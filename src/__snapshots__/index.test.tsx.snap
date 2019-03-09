@@ -17,7 +17,7 @@ exports[`Bottom Scroll Listener in optional specific container mode shall render
   onBottom={[Function]}
 >
   <button>
-    hello
+    This is example of render child pattern
   </button>
 </BottomScrollListener>
 `;

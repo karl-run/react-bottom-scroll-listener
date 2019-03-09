@@ -14,14 +14,15 @@ describe('Bottom Scroll Listener', () => {
   })
 
   it('shall use lodash.debounce when debounce is more than 0', () => {
-    const wrapper = shallow(<BottomScrollListener debounce={200} onBottom={() => {}} />)
+    const wrapper = shallow<BottomScrollListener>(<BottomScrollListener debounce={200} onBottom={() => {}} />)
     const functionName = wrapper.instance().handleOnScroll.name
 
     expect(functionName).toEqual('debounced')
   })
 
   it('shall not use lodash.debounce when debounce is 0', () => {
-    const wrapper = shallow(<BottomScrollListener debounce={0} onBottom={() => {}} />)
+    const wrapper = shallow<BottomScrollListener>(<BottomScrollListener debounce={0} onBottom={() => {}} />)
+
     const functionName = wrapper.instance().handleOnScroll.name
 
     expect(functionName).toEqual('bound ')
@@ -40,7 +41,7 @@ describe('Bottom Scroll Listener', () => {
 
     it('shall add a single listener to document on mount', () => {
       const documentSpy = jest.spyOn(document, 'addEventListener')
-      const wrapper = shallow(<BottomScrollListener onBottom={() => {}} />)
+      const wrapper = shallow<BottomScrollListener>(<BottomScrollListener onBottom={() => {}} />)
 
       wrapper.instance().componentDidMount()
 
@@ -64,14 +65,16 @@ describe('Bottom Scroll Listener', () => {
   describe('in optional specific container mode', () => {
     it('shall render children', () => {
       const wrapper = mount(
-        <BottomScrollListener onBottom={() => {}}>{ref => <button ref={ref}>hello</button>}</BottomScrollListener>,
+        <BottomScrollListener onBottom={() => {}}>
+          {(ref: React.Ref<HTMLButtonElement>) => <button ref={ref}>This is example of render child pattern</button>}
+        </BottomScrollListener>,
       )
 
       expect(wrapper).toMatchSnapshot()
     })
 
     describe('error handling', () => {
-      let originalError: Function
+      let originalError: Console['error']
       beforeAll(() => {
         originalError = console.error
         console.error = () => {}
@@ -83,7 +86,11 @@ describe('Bottom Scroll Listener', () => {
 
       it('shall not throw error if ref is properly passed to a child on mount', () => {
         const mountComponent = () =>
-          mount(<BottomScrollListener onBottom={() => {}}>{ref => <div ref={ref}>Test div</div>}</BottomScrollListener>)
+          mount(
+            <BottomScrollListener onBottom={() => {}}>
+              {(ref: React.Ref<HTMLDivElement>) => <div ref={ref}>Test div</div>}
+            </BottomScrollListener>,
+          )
 
         expect(mountComponent).not.toThrowError()
       })
@@ -97,7 +104,9 @@ describe('Bottom Scroll Listener', () => {
 
       it('shall not throw error if ref is present when component unmounts', () => {
         const wrapper = mount(
-          <BottomScrollListener onBottom={() => {}}>{ref => <div ref={ref}>Test div</div>}</BottomScrollListener>,
+          <BottomScrollListener onBottom={() => {}}>
+            {(ref: React.Ref<HTMLDivElement>) => <div ref={ref}>Test div</div>}
+          </BottomScrollListener>,
         )
 
         const unmountComponent = () => {
@@ -108,10 +117,13 @@ describe('Bottom Scroll Listener', () => {
       })
 
       it('shall throw error if ref is not present when component unmounts', () => {
-        const wrapper = mount(
-          <BottomScrollListener onBottom={() => {}}>{ref => <div ref={ref}>Test div</div>}</BottomScrollListener>,
+        const wrapper = mount<BottomScrollListener>(
+          <BottomScrollListener onBottom={() => {}}>
+            {(ref: React.Ref<HTMLDivElement>) => <div ref={ref}>Test div</div>}
+          </BottomScrollListener>,
         )
 
+        // @ts-ignore
         wrapper.instance().optionalScrollContainerRef.current = null
 
         const unmountComponent = () => {

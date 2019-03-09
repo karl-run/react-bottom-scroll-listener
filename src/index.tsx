@@ -7,7 +7,7 @@
 
 // @ts-ignore
 import debounce from 'lodash.debounce'
-import * as React from 'react'
+import React, { Component } from 'react'
 
 export type Props = {
   /** Required callback that will be invoked when scrolled to bottom */
@@ -25,10 +25,10 @@ export type Props = {
    *   If children passed is a function, that function will be passed a React.RefObject<HTMLElement>
    *   that ref shall be passed to a child tag that will be used for the scrolling container.
    * */
-  children?: React.ReactNode | ((ref: React.RefObject<HTMLElement>) => React.ReactNode)
+  children?: React.ReactNode | (<T extends HTMLElement>(ref: React.Ref<T>) => React.ReactNode)
 }
 
-class BottomScrollListener extends React.Component<Props> {
+class BottomScrollListener extends Component<Props> {
   public static defaultProps = {
     debounce: 200,
     offset: 0,
@@ -72,7 +72,7 @@ class BottomScrollListener extends React.Component<Props> {
     }
   }
 
-  private handleOnScroll() {
+  handleOnScroll() {
     if (this.props.children instanceof Function) {
       const scrollNode = this.optionalScrollContainerRef.current
 
