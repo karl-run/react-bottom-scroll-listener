@@ -5,7 +5,6 @@
  *
  */
 
-// @ts-ignore
 import debounce from 'lodash.debounce'
 import React, { Component } from 'react'
 
@@ -84,11 +83,10 @@ class BottomScrollListener extends Component<Props> {
       }
     } else {
       const scrollNode = document.scrollingElement || document.documentElement
+      const scrollContainerBottomPosition = Math.round(scrollNode.scrollTop + window.innerHeight)
+      const scrollPosition = Math.round(scrollNode.scrollHeight - this.props.offset)
 
-      if (
-        scrollNode != null &&
-        scrollNode.scrollHeight - this.props.offset <= scrollNode.scrollTop + window.innerHeight
-      ) {
+      if (scrollPosition <= scrollContainerBottomPosition) {
         this.props.onBottom()
       }
     }
