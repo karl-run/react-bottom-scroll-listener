@@ -1,6 +1,6 @@
 {
   "name": "react-bottom-scroll-listener",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "description": "A simple React component that lets you listen for when you have scrolled to the bottom.",
   "repository": "https://github.com/karl-run/react-bottom-scroll-listener",
   "keywords": [
@@ -75,5 +75,8 @@
     "rollup-plugin-typescript2": "^0.21.1",
     "rollup-plugin-url": "^2.2.1",
     "typescript": "^3.5.1"
+  },
+  "resolutions": {
+    "@types/react": "^16.8.19"
   }
 }
