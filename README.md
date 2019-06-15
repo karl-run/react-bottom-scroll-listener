@@ -103,3 +103,9 @@ difficult to attach event listeners for scrolling to an arbitrary element.
 | debounce |          number          |   200   | milliseconds, how much debounce there should be on the callback                                                                                                                                                                                                                             |
 | offset   |          number          |    0    | offset from bottom in pixels. E.g. 300 if it should invoke `onBottom` 300px before the bottom.                                                                                                                                                                                              |
 | children | React.Node _or_ Function |  null   | Not required, but you can use this to wrap your components. Most useful when you have some conditional rendering. If this is a function, that function will receive a React.RefObject that _needs_ to be passed to a child element. This element will then be used as the scroll container. |
+
+# Migrating from 2.x.x to 3.x.x
+
+There are no breaking changes except that the required version of React is now 16.8.0. If you are on an
+older version of React you can either upgrade React, or stay on version 2.x.x. If you already
+are on a newer version of React you don't have to do anything, except maybe try out the new hook implementation. :)
