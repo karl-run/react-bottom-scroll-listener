@@ -42,7 +42,7 @@ describe('useBottomScrollListener', () => {
 
       window.dispatchEvent(new Event('scroll'))
 
-      expect(onBottom).toHaveBeenCalledTimes(0)
+      expect(onBottom).not.toHaveBeenCalled()
     })
 
     it('shall invoke onBottom when body is exactly at bottom', async () => {

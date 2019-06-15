@@ -9,6 +9,14 @@ const createCallback = (debounce: number, handleOnScroll: () => void): (() => vo
   }
 }
 
+/**
+ *  A react hook that invokes a callback when user scrolls to the bottom
+ *
+ * @param onBottom Required callback that will be invoked when scrolled to bottom
+ * @param offset Offset from bottom of page in pixels. E.g. 300 will trigger onBottom 300px from the bottom of the page
+ * @param debounce Optional debounce in milliseconds, defaults to 200ms
+ * @return React.MutableRefObject Optionally you can use this to pass to a element to use that as the scroll container
+ */
 function useBottomScrollListener<T extends HTMLElement>(
   onBottom: () => void,
   offset: number = 0,
@@ -33,6 +41,8 @@ function useBottomScrollListener<T extends HTMLElement>(
         onBottom()
       }
     }
+    // ref dependency needed for the tests, doesn't matter for normal execution
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [offset, onBottom, containerRef.current])
 
   useEffect((): (() => void) => {

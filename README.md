@@ -1,13 +1,12 @@
 # react-bottom-scroll-listener [![NPM version](https://img.shields.io/npm/v/react-bottom-scroll-listener.svg?style=flat)](https://www.npmjs.com/package/react-bottom-scroll-listener) [![npm bundle size (minified)](https://img.shields.io/bundlephobia/minzip/react-bottom-scroll-listener.svg)](https://github.com/karl-run/react-bottom-scroll-listener)
 
-A simple React component that lets you listen for when you have scrolled to the bottom.
+A simple **React hook** and **React component** that lets you listen for when you have scrolled to the bottom.
 
 ### Window
 
 ![Example](./example.gif)
 
-
-### Container 
+### Container
 
 ![Example](./example_inner.gif)
 
@@ -21,25 +20,71 @@ yarn:
 
 ## Usage
 
-### On bottom of entire screen
+### Hook
+
+[Full example](/example/src/HookExample.js)
+
+#### On bottom of entire screen
+
+Use the hook in any functional component, the callback will be invoked
+when the user scrolls to the bottom of the document
+
+```jsx
+import { useBottomScrollListener } from 'react-bottom-scroll-listener';
+
+useBottomScrollListener(callback);
+```
+
+#### On bottom of specific container
+
+Use the hook in any functional component, use the ref given from the hook
+and pass it to the element you want to use as a scroll container
+
+The callback will be invoked when the user scrolls to the bottom of the container
+
+```jsx
+import { useBottomScrollListener } from 'react-bottom-scroll-listener';
+
+const containerRef = useBottomScrollListener(callback);
+
+<div ref={scrollRef}>Callback will be invoked when this container is scrolled to bottom.</div>
+```
+
+**Parameters**
+
+```
+useBottomScrollListener(
+   onBottom,       // Required callback that will be invoked when scrolled to bottom
+   offset = 0,     //  Offset from bottom of page in pixels. E.g. 300 will trigger onBottom 300px from the bottom of the page
+   debounce = 200, //  Optional debounce in milliseconds, defaults to 200ms
+) // returns React.MutableRefObject Optionally you can use this to pass to a element to use that as the scroll container
+```
+
+### Component
+
+[Full example](/example/src/ComponentExample.js)
+
+#### On bottom of entire screen
 
 Simply have the BottomScrollListener anywhere in your application and pass it a function as `onBottom`-prop.
 
-```
+```jsx
+import BottomScrollListener from 'react-bottom-scroll-listener';
+
 <BottomScrollListener onBottom={callback} />
 ```
 
-### On bottom of specific container
+#### On bottom of specific container
 
 Pass the BottomScrollListener a function inside the JSX_tag, receive the `scrollRef` in this function from the BottomScrollListener
 and pass it to the component you want to listen for a scroll event on.
 
-```
+```jsx
+import BottomScrollListener from 'react-bottom-scroll-listener';
+
 <BottomScrollListener onBottom={callback}>
   {scrollRef => (
-    <div ref={scrollRef}>
-      Callback will be invoked when this container is scrolled to bottom.
-    </div>
+    <div ref={scrollRef}>Callback will be invoked when this container is scrolled to bottom.</div>
   )}
 </BottomScrollListener>
 ```
