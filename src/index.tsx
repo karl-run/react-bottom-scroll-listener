@@ -75,11 +75,13 @@ class BottomScrollListener extends Component<Props> {
     if (this.props.children instanceof Function) {
       const scrollNode = this.optionalScrollContainerRef.current
 
-      if (
-        scrollNode != null &&
-        scrollNode.scrollHeight - this.props.offset <= scrollNode.scrollTop + scrollNode.clientHeight
-      ) {
-        this.props.onBottom()
+      if (scrollNode != null) {
+        const scrollContainerBottomPosition = Math.round(scrollNode.scrollTop + scrollNode.clientHeight)
+        const scrollPosition = Math.round(scrollNode.scrollHeight - this.props.offset)
+
+        if (scrollPosition <= scrollContainerBottomPosition) {
+          this.props.onBottom()
+        }
       }
     } else {
       const scrollNode = document.scrollingElement || document.documentElement
