@@ -38,12 +38,20 @@ header h1 {
 
 header label {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   margin: 0 16px;
+  width: 190px;
 }
 
 header label span {
   margin: 0 8px;
+  text-align: right;
+  width: 100%;
+}
+
+header > .right-toggle-box {
+  display: flex;
 }
 
 .root > label > input {
@@ -58,22 +66,22 @@ header label span {
   align-items: center;
 }
 
-.scrollbox {
+.scroll-box {
   margin: 16px;
   margin-top: 68px;
   padding: 8px;
   color: #666;
 }
 
-.scrollbox > div {
+.scroll-box > div {
   margin-bottom: 500px;
 }
 
-.scrollbox > div:last-of-type {
+.scroll-box > div:last-of-type {
   margin-bottom: 0;
 }
 
-.innerScrollExample {
+.inner-scroll-example {
   padding: 8px;
   position: absolute;
   right: 42px;
@@ -87,11 +95,11 @@ header label span {
     0px 1px 10px 0px rgba(0, 0, 0, 0.12);
 }
 
-.innerScrollExample > div {
+.inner-scroll-example > div {
   margin-bottom: 150px;
 }
 
-.innerScrollExample > div:last-of-type {
+.inner-scroll-example > div:last-of-type {
   margin-bottom: 0;
 }
 
@@ -104,7 +112,7 @@ header label span {
     display: none;
   }
 
-  .innerScrollExample {
+  .inner-scroll-example {
     top: 200px;
     left: 0;
     width: 80%;

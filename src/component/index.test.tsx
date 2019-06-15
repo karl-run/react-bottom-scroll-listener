@@ -6,7 +6,7 @@ import BottomScrollListener from './index'
 
 Enzyme.configure({ adapter: new Adapter() })
 
-describe('Bottom Scroll Listener', () => {
+describe('BottomScrollListener', () => {
   it('shall not render anything if there are no children', () => {
     const wrapper = shallow(<BottomScrollListener onBottom={() => {}} />)
 
