@@ -39,7 +39,7 @@ class BottomScrollListener extends Component<Props> {
     super(props)
 
     if (props.debounce) {
-      this.handleOnScroll = debounce(this.handleOnScroll.bind(this), props.debounce, { trailing: true })
+      this.handleOnScroll = debounce(this.handleOnScroll.bind(this), props.debounce, { leading: true, trailing: true })
     } else {
       this.handleOnScroll = this.handleOnScroll.bind(this)
     }

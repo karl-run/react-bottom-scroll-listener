@@ -3,7 +3,7 @@ import lodashDebounce from 'lodash.debounce'
 
 const createCallback = (debounce: number, handleOnScroll: () => void): (() => void) => {
   if (debounce) {
-    return lodashDebounce(handleOnScroll, debounce, { trailing: true })
+    return lodashDebounce(handleOnScroll, debounce, { leading: true, trailing: true })
   } else {
     return handleOnScroll
   }
