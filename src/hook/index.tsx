@@ -42,7 +42,6 @@ function useBottomScrollListener<T extends HTMLElement>(
       }
     }
     // ref dependency needed for the tests, doesn't matter for normal execution
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [offset, onBottom, containerRef.current])
 
   useEffect((): (() => void) => {

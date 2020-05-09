@@ -1,13 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { renderHook } from 'react-hooks-testing-library'
+import { renderHook } from '@testing-library/react-hooks'
 
 import useBottomScrollListener from './'
 
 /* Mock out scrollHeight so we can change it before dispatching scroll event */
 Object.defineProperty(HTMLElement.prototype, 'scrollHeight', {
   configurable: true,
-  get: function() {
+  get: function () {
     return this._scrollHeight || 0
   },
   set(val) {
@@ -18,7 +18,7 @@ Object.defineProperty(HTMLElement.prototype, 'scrollHeight', {
 /* Mock out clientHeight so we can change it before dispatching scroll event in custom containers */
 Object.defineProperty(HTMLElement.prototype, 'clientHeight', {
   configurable: true,
-  get: function() {
+  get: function () {
     return this._clientHeight || 0
   },
   set(val) {
@@ -66,7 +66,7 @@ describe('useBottomScrollListener', () => {
   describe('given a ref it should use the given ref and', () => {
     const setupFakeContainer = (containerRef: React.RefObject<HTMLDivElement>) => {
       const div = document.createElement('div')
-      // eslint-disable-next-line react/no-render-return-value, @typescript-eslint/no-explicit-any
+      // eslint-disable-next-line react/no-render-return-value
       const renderedNode: HTMLDivElement = ReactDOM.render(<div ref={containerRef} />, div) as any
 
       // @ts-ignore
@@ -80,7 +80,7 @@ describe('useBottomScrollListener', () => {
       return { renderedNode, getTriggerScroll: () => triggerScroll }
     }
 
-    it('shall not invoke onBottom when container has not hit bottom', async done => {
+    it('shall not invoke onBottom when container has not hit bottom', async (done) => {
       const onBottom = jest.fn()
 
       const hook = renderHook(() => useBottomScrollListener<HTMLDivElement>(onBottom, 0, 0))
@@ -109,7 +109,7 @@ describe('useBottomScrollListener', () => {
       done()
     })
 
-    it('shall invoke onBottom when container is exactly at bottom', async done => {
+    it('shall invoke onBottom when container is exactly at bottom', async (done) => {
       const onBottom = jest.fn()
 
       const hook = renderHook(() => useBottomScrollListener<HTMLDivElement>(onBottom, 0, 0))
