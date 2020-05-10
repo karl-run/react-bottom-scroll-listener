@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useMemo } from 'react'
 import lodashDebounce from 'lodash.debounce'
 
-type DebounceOptions = Parameters<typeof lodashDebounce>[2]
+export type DebounceOptions = Parameters<typeof lodashDebounce>[2]
 
 const createCallback = (debounce: number, handleOnScroll: () => void, options: DebounceOptions): (() => void) => {
   if (debounce) {
@@ -17,6 +17,7 @@ const createCallback = (debounce: number, handleOnScroll: () => void, options: D
  * @param onBottom Required callback that will be invoked when scrolled to bottom
  * @param offset Offset from bottom of page in pixels. E.g. 300 will trigger onBottom 300px from the bottom of the page
  * @param debounce Optional debounce in milliseconds, defaults to 200ms
+ * @param debounceOptions Options passed to lodash.debounce, see https://lodash.com/docs/4.17.15#debounce
  * @return React.MutableRefObject Optionally you can use this to pass to a element to use that as the scroll container
  */
 function useBottomScrollListener<T extends HTMLElement>(

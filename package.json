@@ -1,6 +1,6 @@
 {
   "name": "react-bottom-scroll-listener",
-  "version": "4.0.0-beta-1",
+  "version": "4.0.0",
   "description": "A simple React component that lets you listen for when you have scrolled to the bottom.",
   "repository": "https://github.com/karl-run/react-bottom-scroll-listener",
   "keywords": [
@@ -58,11 +58,14 @@
     "eslint-config-prettier": "^6.7.0",
     "eslint-config-standard": "^14.1.0",
     "eslint-config-standard-react": "^9.2.0",
+    "eslint-plugin-flowtype": "^4.7.0",
     "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-node": "^11.0.0",
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-react": "^7.17.0",
+    "eslint-plugin-react-hooks": "^4.0.0",
     "eslint-plugin-standard": "^4.0.1",
     "gh-pages": "^2.2.0",
     "microbundle-crl": "^0.13.10",
