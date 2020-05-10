@@ -1,4 +1,5 @@
-Example for react-bottom-scroll-listener
+This example was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-Install dependencies: `yarn`
-Start development server: `yarn start`
+It is linked to the react-bottom-scroll-listener-2 package in the parent directory for development purposes.
+
+You can run `yarn install` and then `yarn start` to test your package.

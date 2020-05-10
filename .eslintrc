@@ -1,28 +1,34 @@
 {
   "parser": "@typescript-eslint/parser",
   "extends": [
-    "plugin:@typescript-eslint/recommended",
-    "prettier/@typescript-eslint",
+    "standard",
+    "standard-react",
     "plugin:prettier/recommended",
-    "plugin:react/recommended",
-    "plugin:jsx-a11y/recommended"
+    "prettier/standard",
+    "prettier/react",
+    "plugin:@typescript-eslint/eslint-recommended"
   ],
-  "plugins": ["@typescript-eslint", "react", "react-hooks", "jsx-a11y"],
-  "rules": {
-    "@typescript-eslint/explicit-function-return-type": "off",
-    "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn"
+  "env": {
+    "node": true
   },
   "parserOptions": {
-    "ecmaVersion": 2018,
-    "sourceType": "module",
+    "ecmaVersion": 2020,
     "ecmaFeatures": {
+      "legacyDecorators": true,
       "jsx": true
     }
   },
   "settings": {
     "react": {
-      "version": "detect"
+      "version": "16"
     }
+  },
+  "rules": {
+    "space-before-function-paren": 0,
+    "react/prop-types": 0,
+    "react/jsx-handler-names": 0,
+    "react/jsx-fragments": 0,
+    "react/no-unused-prop-types": 0,
+    "import/export": 0
   }
 }

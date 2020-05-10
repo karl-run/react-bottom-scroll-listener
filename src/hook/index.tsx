@@ -1,9 +1,11 @@
-import { useCallback, useEffect, useRef } from 'react'
+import { useCallback, useEffect, useRef, useMemo } from 'react'
 import lodashDebounce from 'lodash.debounce'
 
-const createCallback = (debounce: number, handleOnScroll: () => void): (() => void) => {
+export type DebounceOptions = Parameters<typeof lodashDebounce>[2]
+
+const createCallback = (debounce: number, handleOnScroll: () => void, options: DebounceOptions): (() => void) => {
   if (debounce) {
-    return lodashDebounce(handleOnScroll, debounce, { trailing: true })
+    return lodashDebounce(handleOnScroll, debounce, options)
   } else {
     return handleOnScroll
   }
@@ -15,13 +17,16 @@ const createCallback = (debounce: number, handleOnScroll: () => void): (() => vo
  * @param onBottom Required callback that will be invoked when scrolled to bottom
  * @param offset Offset from bottom of page in pixels. E.g. 300 will trigger onBottom 300px from the bottom of the page
  * @param debounce Optional debounce in milliseconds, defaults to 200ms
+ * @param debounceOptions Options passed to lodash.debounce, see https://lodash.com/docs/4.17.15#debounce
  * @return React.MutableRefObject Optionally you can use this to pass to a element to use that as the scroll container
  */
 function useBottomScrollListener<T extends HTMLElement>(
   onBottom: () => void,
   offset: number = 0,
   debounce: number = 200,
+  debounceOptions: DebounceOptions = { leading: true },
 ) {
+  const debouncedOnBottom = useMemo(() => createCallback(debounce, onBottom, debounceOptions), [debounce, onBottom])
   const containerRef = useRef<T>(null)
   const handleOnScroll = useCallback(() => {
     if (containerRef.current != null) {
@@ -30,7 +35,7 @@ function useBottomScrollListener<T extends HTMLElement>(
       const scrollPosition = Math.round(scrollNode.scrollHeight - offset)
 
       if (scrollPosition <= scrollContainerBottomPosition) {
-        onBottom()
+        debouncedOnBottom()
       }
     } else {
       const scrollNode: Element = document.scrollingElement || document.documentElement
@@ -38,28 +43,25 @@ function useBottomScrollListener<T extends HTMLElement>(
       const scrollPosition = Math.round(scrollNode.scrollHeight - offset)
 
       if (scrollPosition <= scrollContainerBottomPosition) {
-        onBottom()
+        debouncedOnBottom()
       }
     }
     // ref dependency needed for the tests, doesn't matter for normal execution
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [offset, onBottom, containerRef.current])
 
   useEffect((): (() => void) => {
-    const callback: () => void = createCallback(debounce, handleOnScroll)
     const ref: T | null = containerRef.current
-
     if (ref != null) {
-      ref.addEventListener('scroll', callback)
+      ref.addEventListener('scroll', handleOnScroll)
     } else {
-      window.addEventListener('scroll', callback)
+      window.addEventListener('scroll', handleOnScroll)
     }
 
     return () => {
       if (ref != null) {
-        ref.removeEventListener('scroll', callback)
+        ref.removeEventListener('scroll', handleOnScroll)
       } else {
-        window.removeEventListener('scroll', callback)
+        window.removeEventListener('scroll', handleOnScroll)
       }
     }
   }, [handleOnScroll, debounce])
