@@ -29,19 +29,15 @@ export interface Props {
    *   If children passed is a function, that function will be passed a React.RefObject<HTMLElement>
    *   that ref shall be passed to a child tag that will be used for the scrolling container.
    * */
-  children?: React.ReactNode | (<T extends HTMLElement>(ref: React.Ref<T>) => React.ReactNode)
+  children?:
+    | JSX.Element
+    | (<T>(ref: ((instance: T | null) => void) | React.MutableRefObject<T | null> | null) => JSX.Element)
 }
 
 /**
  * A simple React component that lets you listen for when you have scrolled to the bottom.
  */
-const BottomScrollListener = ({
-  children,
-  onBottom,
-  offset,
-  debounce,
-  debounceOptions,
-}: Props): React.ReactNode | null => {
+const BottomScrollListener = ({ children, onBottom, offset, debounce, debounceOptions }: Props): JSX.Element | null => {
   const optionalScrollContainerRef = useBottomScrollListener(onBottom, offset, debounce, debounceOptions)
 
   if (!children) return null
