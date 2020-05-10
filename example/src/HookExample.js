@@ -7,7 +7,7 @@ const HookExample = ({ alertOnBottom }) => {
     console.log('I am at bottom! ' + Math.round(performance.now()))
 
     if (alertOnBottom) {
-      alert('Bottom hit! Too slow? Reduce "debounce" value in props')
+      alert('Bottom hit!')
     }
   }, [alertOnBottom])
 
@@ -15,7 +15,7 @@ const HookExample = ({ alertOnBottom }) => {
     console.log('I am at bottom in optional container! ' + Math.round(performance.now()))
 
     if (alertOnBottom) {
-      alert('Bottom of this container hit! Too slow? Reduce "debounce" value in props')
+      alert('Bottom of this container hit!')
     }
   }, [alertOnBottom])
 

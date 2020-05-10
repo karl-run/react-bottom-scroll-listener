@@ -1,10 +1,24 @@
 {
   "name": "react-bottom-scroll-listener",
-  "version": "1.0.0",
-  "description": "Made with create-react-library",
-  "author": "karl-run",
+  "version": "4.0.0-beta-1",
+  "description": "A simple React component that lets you listen for when you have scrolled to the bottom.",
+  "repository": "https://github.com/karl-run/react-bottom-scroll-listener",
+  "keywords": [
+    "react",
+    "scrolling",
+    "bottom",
+    "listener",
+    "callback"
+  ],
+  "author": "Karl J. Overå",
   "license": "MIT",
-  "repository": "karl-run/react-bottom-scroll-listener",
+  "homepage": "https://github.com/karl-run/react-bottom-scroll-listener#readme",
+  "bugs": {
+    "url": "https://github.com/karl-run/react-bottom-scroll-listener/issues"
+  },
+  "files": [
+    "dist"
+  ],
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
   "source": "src/index.tsx",
@@ -23,8 +37,12 @@
     "predeploy": "cd example && yarn install && yarn run build",
     "deploy": "gh-pages -d example/build"
   },
+  "dependencies": {
+    "lodash.debounce": "^4.0.8"
+  },
   "peerDependencies": {
-    "react": "^16.0.0"
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0"
   },
   "devDependencies": {
     "@testing-library/react-hooks": "^3.2.1",
@@ -54,11 +72,5 @@
     "react-dom": "^16.13.1",
     "react-scripts": "^3.4.1",
     "react-test-renderer": "^16.13.1"
-  },
-  "files": [
-    "dist"
-  ],
-  "dependencies": {
-    "lodash.debounce": "^4.0.8"
   }
 }

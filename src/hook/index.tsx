@@ -1,9 +1,11 @@
-import { useCallback, useEffect, useRef } from 'react'
+import { useCallback, useEffect, useRef, useMemo } from 'react'
 import lodashDebounce from 'lodash.debounce'
 
-const createCallback = (debounce: number, handleOnScroll: () => void): (() => void) => {
+type DebounceOptions = Parameters<typeof lodashDebounce>[2]
+
+const createCallback = (debounce: number, handleOnScroll: () => void, options: DebounceOptions): (() => void) => {
   if (debounce) {
-    return lodashDebounce(handleOnScroll, debounce, { trailing: true })
+    return lodashDebounce(handleOnScroll, debounce, options)
   } else {
     return handleOnScroll
   }
@@ -21,7 +23,9 @@ function useBottomScrollListener<T extends HTMLElement>(
   onBottom: () => void,
   offset: number = 0,
   debounce: number = 200,
+  debounceOptions: DebounceOptions = { leading: true },
 ) {
+  const debouncedOnBottom = useMemo(() => createCallback(debounce, onBottom, debounceOptions), [debounce, onBottom])
   const containerRef = useRef<T>(null)
   const handleOnScroll = useCallback(() => {
     if (containerRef.current != null) {
@@ -30,7 +34,7 @@ function useBottomScrollListener<T extends HTMLElement>(
       const scrollPosition = Math.round(scrollNode.scrollHeight - offset)
 
       if (scrollPosition <= scrollContainerBottomPosition) {
-        onBottom()
+        debouncedOnBottom()
       }
     } else {
       const scrollNode: Element = document.scrollingElement || document.documentElement
@@ -38,27 +42,25 @@ function useBottomScrollListener<T extends HTMLElement>(
       const scrollPosition = Math.round(scrollNode.scrollHeight - offset)
 
       if (scrollPosition <= scrollContainerBottomPosition) {
-        onBottom()
+        debouncedOnBottom()
       }
     }
     // ref dependency needed for the tests, doesn't matter for normal execution
   }, [offset, onBottom, containerRef.current])
 
   useEffect((): (() => void) => {
-    const callback: () => void = createCallback(debounce, handleOnScroll)
     const ref: T | null = containerRef.current
-
     if (ref != null) {
-      ref.addEventListener('scroll', callback)
+      ref.addEventListener('scroll', handleOnScroll)
     } else {
-      window.addEventListener('scroll', callback)
+      window.addEventListener('scroll', handleOnScroll)
     }
 
     return () => {
       if (ref != null) {
-        ref.removeEventListener('scroll', callback)
+        ref.removeEventListener('scroll', handleOnScroll)
       } else {
-        window.removeEventListener('scroll', callback)
+        window.removeEventListener('scroll', handleOnScroll)
       }
     }
   }, [handleOnScroll, debounce])
