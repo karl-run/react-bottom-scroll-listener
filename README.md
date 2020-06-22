@@ -45,7 +45,7 @@ The callback will be invoked when the user scrolls to the bottom of the containe
 ```jsx
 import { useBottomScrollListener } from 'react-bottom-scroll-listener';
 
-const containerRef = useBottomScrollListener(callback);
+const scrollRef = useBottomScrollListener(callback);
 
 <div ref={scrollRef}>Callback will be invoked when this container is scrolled to bottom.</div>
 ```
