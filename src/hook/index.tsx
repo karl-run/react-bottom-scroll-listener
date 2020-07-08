@@ -18,6 +18,7 @@ const createCallback = (debounce: number, handleOnScroll: () => void, options: D
  * @param offset Offset from bottom of page in pixels. E.g. 300 will trigger onBottom 300px from the bottom of the page
  * @param debounce Optional debounce in milliseconds, defaults to 200ms
  * @param debounceOptions Options passed to lodash.debounce, see https://lodash.com/docs/4.17.15#debounce
+ * @param triggerOnNoScroll Triggers the onBottom callback when the page has no scrollbar
  * @return React.MutableRefObject Optionally you can use this to pass to a element to use that as the scroll container
  */
 function useBottomScrollListener<T extends HTMLElement>(
@@ -25,6 +26,7 @@ function useBottomScrollListener<T extends HTMLElement>(
   offset: number = 0,
   debounce: number = 200,
   debounceOptions: DebounceOptions = { leading: true },
+  triggerOnNoScroll: boolean = false
 ) {
   const debouncedOnBottom = useMemo(() => createCallback(debounce, onBottom, debounceOptions), [debounce, onBottom])
   const containerRef = useRef<T>(null)
@@ -55,6 +57,10 @@ function useBottomScrollListener<T extends HTMLElement>(
       ref.addEventListener('scroll', handleOnScroll)
     } else {
       window.addEventListener('scroll', handleOnScroll)
+    }
+
+    if (triggerOnNoScroll) {
+      handleOnScroll()
     }
 
     return () => {
