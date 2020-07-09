@@ -24,6 +24,11 @@ export interface Props {
   debounceOptions?: DebounceOptions
 
   /**
+   * Triggers the onBottom callback when the page has no scrollbar, defaults to false
+   */
+  triggerOnNoScroll: boolean
+
+  /**
    *   Optional children to be rendered.
    *
    *   If children passed is a function, that function will be passed a React.RefObject<HTMLElement>
@@ -37,8 +42,8 @@ export interface Props {
 /**
  * A simple React component that lets you listen for when you have scrolled to the bottom.
  */
-const BottomScrollListener = ({ children, onBottom, offset, debounce, debounceOptions }: Props): JSX.Element | null => {
-  const optionalScrollContainerRef = useBottomScrollListener(onBottom, offset, debounce, debounceOptions)
+const BottomScrollListener = ({ children, onBottom, offset, debounce, debounceOptions, triggerOnNoScroll }: Props): JSX.Element | null => {
+  const optionalScrollContainerRef = useBottomScrollListener(onBottom, offset, debounce, debounceOptions, triggerOnNoScroll)
 
   if (!children) return null
   else if (typeof children === 'function') return children(optionalScrollContainerRef)
