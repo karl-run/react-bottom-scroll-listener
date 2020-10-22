@@ -1,29 +1,29 @@
-import React, { useCallback } from 'react'
+import React, { useCallback } from 'react';
 
-import { useBottomScrollListener } from 'react-bottom-scroll-listener'
+import { useBottomScrollListener } from 'react-bottom-scroll-listener';
 
 const HookExample = ({ alertOnBottom }) => {
   const handleOnDocumentBottom = useCallback(() => {
-    console.log('I am at bottom! ' + Math.round(performance.now()))
+    console.log('I am at bottom! ' + Math.round(performance.now()));
 
     if (alertOnBottom) {
-      alert('Bottom hit!')
+      alert('Bottom hit!');
     }
-  }, [alertOnBottom])
+  }, [alertOnBottom]);
 
   const handleContainerOnBottom = useCallback(() => {
-    console.log('I am at bottom in optional container! ' + Math.round(performance.now()))
+    console.log('I am at bottom in optional container! ' + Math.round(performance.now()));
 
     if (alertOnBottom) {
-      alert('Bottom of this container hit!')
+      alert('Bottom of this container hit!');
     }
-  }, [alertOnBottom])
+  }, [alertOnBottom]);
 
   /* This will trigger handleOnDocumentBottom when the body of the page hits the bottom */
-  useBottomScrollListener(handleOnDocumentBottom)
+  useBottomScrollListener(handleOnDocumentBottom);
 
   /* This will trigger handleOnContainerBottom when the container that is passed the ref hits the bottom */
-  const containerRef = useBottomScrollListener(handleContainerOnBottom)
+  const containerRef = useBottomScrollListener(handleContainerOnBottom);
 
   return (
     <div className="root">
@@ -45,7 +45,7 @@ const HookExample = ({ alertOnBottom }) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default HookExample
+export default HookExample;

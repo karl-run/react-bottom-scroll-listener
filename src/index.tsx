@@ -1,6 +1,3 @@
-import BottomScrollListener from './component'
-import useBottomScrollListener from './hook'
-
-export { useBottomScrollListener }
-
-export default BottomScrollListener
+export { default as BottomScrollListener } from './component';
+export type { BottomScrollListenerProps } from './component';
+export { default as useBottomScrollListener } from './hook';

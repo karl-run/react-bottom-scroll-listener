@@ -1,25 +1,25 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
-import 'react-toggle/style.css'
+import 'react-toggle/style.css';
 
-import BottomScrollListener from 'react-bottom-scroll-listener'
+import { BottomScrollListener } from 'react-bottom-scroll-listener';
 
 class ComponentExample extends Component {
   handleOnDocumentBottom = () => {
-    console.log('I am at bottom! ' + Math.round(performance.now()))
+    console.log('I am at bottom! ' + Math.round(performance.now()));
 
     if (this.props.alertOnBottom) {
-      alert('Bottom hit! Too slow? Reduce "debounce" value in props')
+      alert('Bottom hit! Too slow? Reduce "debounce" value in props');
     }
-  }
+  };
 
   handleContainerOnBottom = () => {
-    console.log('I am at bottom in optional container! ' + Math.round(performance.now()))
+    console.log('I am at bottom in optional container! ' + Math.round(performance.now()));
 
     if (this.props.alertOnBottom) {
-      alert('Bottom of this container hit! Too slow? Reduce "debounce" value in props')
+      alert('Bottom of this container hit! Too slow? Reduce "debounce" value in props');
     }
-  }
+  };
 
   render() {
     return (
@@ -39,7 +39,7 @@ class ComponentExample extends Component {
         {/* If you want to listen for the bottom of a specific container you need to forward
             a scrollRef as a ref to your container */}
         <BottomScrollListener onBottom={this.handleContainerOnBottom}>
-          {scrollRef => (
+          {(scrollRef) => (
             <div ref={scrollRef} className="inner-scroll-example">
               <h4>Callback when this container hits bottom</h4>
               <div>Scroll down! ▼▼▼</div>
@@ -50,8 +50,8 @@ class ComponentExample extends Component {
           )}
         </BottomScrollListener>
       </div>
-    )
+    );
   }
 }
 
-export default ComponentExample
+export default ComponentExample;
