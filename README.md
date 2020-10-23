@@ -30,9 +30,9 @@ Use the hook in any functional component, the callback will be invoked
 when the user scrolls to the bottom of the document
 
 ```jsx
-import { useBottomScrollListener } from 'react-bottom-scroll-listener'
+import { useBottomScrollListener } from 'react-bottom-scroll-listener';
 
-useBottomScrollListener(callback)
+useBottomScrollListener(callback);
 ```
 
 #### On bottom of specific container
@@ -43,11 +43,11 @@ and pass it to the element you want to use as a scroll container
 The callback will be invoked when the user scrolls to the bottom of the container
 
 ```jsx
-import { useBottomScrollListener } from 'react-bottom-scroll-listener'
+import { useBottomScrollListener } from 'react-bottom-scroll-listener';
 
-const scrollRef = useBottomScrollListener(callback)
+const scrollRef = useBottomScrollListener(callback);
 
-;<div ref={scrollRef}>Callback will be invoked when this container is scrolled to bottom.</div>
+<div ref={scrollRef}>Callback will be invoked when this container is scrolled to bottom.</div>
 ```
 
 **Parameters**
@@ -71,8 +71,9 @@ useBottomScrollListener(
 Simply have the BottomScrollListener anywhere in your application and pass it a function as `onBottom`-prop.
 
 ```jsx
-import BottomScrollListener from 'react-bottom-scroll-listener'
-;<BottomScrollListener onBottom={callback} />
+import BottomScrollListener from 'react-bottom-scroll-listener';
+
+<BottomScrollListener onBottom={callback} />
 ```
 
 #### On bottom of specific container
@@ -81,8 +82,9 @@ Pass the BottomScrollListener a function inside the JSX_tag, receive the `scroll
 and pass it to the component you want to listen for a scroll event on.
 
 ```jsx
-import BottomScrollListener from 'react-bottom-scroll-listener'
-;<BottomScrollListener onBottom={callback}>
+import BottomScrollListener from 'react-bottom-scroll-listener';
+
+<BottomScrollListener onBottom={callback}>
   {(scrollRef) => <div ref={scrollRef}>Callback will be invoked when this container is scrolled to bottom.</div>}
 </BottomScrollListener>
 ```
