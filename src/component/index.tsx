@@ -26,7 +26,7 @@ export interface Props {
   /**
    * Triggers the onBottom callback when the page has no scrollbar, defaults to false
    */
-  triggerOnNoScroll: boolean
+  triggerOnNoScroll?: boolean
 
   /**
    *   Optional children to be rendered.
