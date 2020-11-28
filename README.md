@@ -18,6 +18,47 @@ npm:
 yarn:
 `yarn add react-bottom-scroll-listener`
 
+## Migrating to V5
+
+Version 5 is only a refactor for the hook to use an options parameter, instead
+of relying of function parameters which were starting to get out of hand.
+
+#### If you are using the component, there are no breaking changes
+
+If your hook looks like this:
+
+```tsx
+useBottomScrollListener(callback, 0, 200, undefined, true);
+```
+
+You will have to change it to use the options parameter:
+
+```
+useBottomScrollListener(callback, {
+  offset: 100,
+  debounce: 0,
+  triggerOnNoScroll: true
+})
+```
+
+Remember that you can omit any values that are using the defaults! The defaults are ase following:
+
+```
+  offset: 0,
+  debounce: 200,
+  debounceOptions: { leading: true },
+  triggerOnNoScroll: false,
+```
+
+So for the average use case, you are probably only setting one of these values, so your hook
+might look like this:
+
+```
+useBottomScrollListener(callback, { triggerOnNoScroll: true })
+```
+
+You can refer to the Usage-section for more details.
+
 ## Usage
 
 ### Hook
@@ -47,19 +88,27 @@ import { useBottomScrollListener } from 'react-bottom-scroll-listener';
 
 const scrollRef = useBottomScrollListener(callback);
 
-<div ref={scrollRef}>Callback will be invoked when this container is scrolled to bottom.</div>
+<div ref={scrollRef}>Callback will be invoked when this container is scrolled to bottom.</div>;
 ```
 
 **Parameters**
 
 ```
-useBottomScrollListener(
-   onBottom,         // Required callback that will be invoked when scrolled to bottom
-   offset = 0,       // Offset from bottom of page in pixels. E.g. 300 will trigger onBottom 300px from the bottom of the page
-   debounce = 200,   // Optional debounce in milliseconds, defaults to 200ms
-   debounceOptions,  // Overwrite the debounceOptions for lodash.debounce, default to { leading: true }
-   triggerOnNoScroll,// If container is too short, enables a trigger of the callback if that happens, defaults to false
-) // returns React.MutableRefObject Optionally you can use this to pass to a element to use that as the scroll container
+useBottomScrollListener<T extends HTMLElement>(
+  // Required callback that will be invoked when scrolled to bottom
+  onBottom: () => void,
+  // Options, entirely optional, you can provide one or several to overwrite the defaults
+  options?: {
+    // Offset from bottom of page in pixels. E.g. 300 will trigger onBottom 300px from the bottom of the page
+    offset?: number
+    // Optional debounce in milliseconds, defaults to 200ms
+    debounce?: number
+    // Overwrite the debounceOptions for lodash.debounce, default to { leading: true }
+    debounceOptions?: DebounceOptions
+    // If container is too short, enables a trigger of the callback if that happens, defaults to false
+    triggerOnNoScroll?: boolean
+  },
+); // returns React.MutableRefObject Optionally you can use this to pass to a element to use that as the scroll container
 ```
 
 ### Component
@@ -73,7 +122,7 @@ Simply have the BottomScrollListener anywhere in your application and pass it a 
 ```jsx
 import BottomScrollListener from 'react-bottom-scroll-listener';
 
-<BottomScrollListener onBottom={callback} />
+<BottomScrollListener onBottom={callback} />;
 ```
 
 #### On bottom of specific container
@@ -86,7 +135,7 @@ import BottomScrollListener from 'react-bottom-scroll-listener';
 
 <BottomScrollListener onBottom={callback}>
   {(scrollRef) => <div ref={scrollRef}>Callback will be invoked when this container is scrolled to bottom.</div>}
-</BottomScrollListener>
+</BottomScrollListener>;
 ```
 
 > Those are some weird children, what's going on?
@@ -103,7 +152,7 @@ difficult to attach event listeners for scrolling to an arbitrary element.
 | debounce          |          number          |       200       | milliseconds, how much debounce there should be on the callback                                                                                                                                                                                                                             |
 | offset            |          number          |        0        | offset from bottom in pixels. E.g. 300 if it should invoke `onBottom` 300px before the bottom.                                                                                                                                                                                              |
 | debounceOptions   |     DebounceOptions      | {leading: true} | see the lodash.debounce options: see https://lodash.com/docs/4.17.15#debounce                                                                                                                                                                                                               |
-| triggerOnNoScroll |         boolean          |      false      | if container is too short, enables a trigger of the callback if that happens                                                                                                                                                                                             |
+| triggerOnNoScroll |         boolean          |      false      | if container is too short, enables a trigger of the callback if that happens                                                                                                                                                                                                                |
 | children          | React.Node _or_ Function |      null       | Not required, but you can use this to wrap your components. Most useful when you have some conditional rendering. If this is a function, that function will receive a React.RefObject that _needs_ to be passed to a child element. This element will then be used as the scroll container. |
 
 # Migrating from 2.x.x to 3.x.x
