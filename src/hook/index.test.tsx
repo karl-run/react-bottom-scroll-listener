@@ -35,7 +35,7 @@ describe('useBottomScrollListener', () => {
 
       // window size is 768.
       // 768 + 400 = 1168, should not scroll
-      ((document.documentElement as unknown) as Record<string, unknown>).scrollHeight = 1200;
+      (document.documentElement as unknown as Record<string, unknown>).scrollHeight = 1200;
       document.documentElement.scrollTop = 400;
 
       window.dispatchEvent(new Event('scroll'));
@@ -51,7 +51,7 @@ describe('useBottomScrollListener', () => {
       // window size is 768.
       // 768 + 432 = 1200, should scroll
 
-      ((document.documentElement as unknown) as Record<string, unknown>).scrollHeight = 1200;
+      (document.documentElement as unknown as Record<string, unknown>).scrollHeight = 1200;
       document.documentElement.scrollTop = 432;
 
       window.dispatchEvent(new Event('scroll'));
@@ -63,12 +63,12 @@ describe('useBottomScrollListener', () => {
   describe('given a ref it should use the given ref and', () => {
     const setupFakeContainer = (containerRef: React.RefObject<HTMLDivElement>) => {
       const div = document.createElement('div');
-      const renderedNode: HTMLDivElement = (ReactDOM.render(
+      const renderedNode: HTMLDivElement = ReactDOM.render(
         <div ref={containerRef} />,
         div,
-      ) as unknown) as HTMLDivElement;
+      ) as unknown as HTMLDivElement;
 
-      ((renderedNode as unknown) as Record<string, unknown>).clientHeight = 600;
+      (renderedNode as unknown as Record<string, unknown>).clientHeight = 600;
 
       let triggerScroll: (() => void) | null = null;
       renderedNode.addEventListener = jest.fn().mockImplementation((_, cb) => {
@@ -95,7 +95,7 @@ describe('useBottomScrollListener', () => {
 
       // container size is 600.
       // 600 + 300 = 900, should not scroll
-      ((renderedNode as unknown) as Record<string, unknown>).scrollHeight = 1000;
+      (renderedNode as unknown as Record<string, unknown>).scrollHeight = 1000;
       renderedNode.scrollTop = 300;
 
       triggerScroll();
@@ -123,7 +123,7 @@ describe('useBottomScrollListener', () => {
       // container size is 600.
       // 600 + 400 = 1000, should scroll
 
-      ((renderedNode as unknown) as Record<string, unknown>).scrollHeight = 1000;
+      (renderedNode as unknown as Record<string, unknown>).scrollHeight = 1000;
       renderedNode.scrollTop = 400;
 
       triggerScroll();
