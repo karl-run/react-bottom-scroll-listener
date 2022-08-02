@@ -90,7 +90,7 @@ describe('useBottomScrollListener', () => {
 
       const triggerScroll = getTriggerScroll();
       if (triggerScroll == null) {
-        return done.fail('Hook setup failed, callback never set');
+        throw new Error('Hook setup failed, callback never set');
       }
 
       // container size is 600.
@@ -117,7 +117,7 @@ describe('useBottomScrollListener', () => {
 
       const triggerScroll = getTriggerScroll();
       if (triggerScroll == null) {
-        return done.fail('Hook setup failed, callback never set');
+        throw new Error('Hook setup failed, callback never set');
       }
 
       // container size is 600.
