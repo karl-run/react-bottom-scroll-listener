@@ -1,17 +1,13 @@
 {
   "files": {
-    "main.css": "/react-bottom-scroll-listener/static/css/main.1bfda0a1.chunk.css",
-    "main.js": "/react-bottom-scroll-listener/static/js/main.37c3c7c0.chunk.js",
-    "main.js.map": "/react-bottom-scroll-listener/static/js/main.37c3c7c0.chunk.js.map",
-    "runtime~main.js": "/react-bottom-scroll-listener/static/js/runtime~main.fcf864ad.js",
-    "runtime~main.js.map": "/react-bottom-scroll-listener/static/js/runtime~main.fcf864ad.js.map",
-    "static/css/2.ca025b70.chunk.css": "/react-bottom-scroll-listener/static/css/2.ca025b70.chunk.css",
-    "static/js/2.a0ababa7.chunk.js": "/react-bottom-scroll-listener/static/js/2.a0ababa7.chunk.js",
-    "static/js/2.a0ababa7.chunk.js.map": "/react-bottom-scroll-listener/static/js/2.a0ababa7.chunk.js.map",
+    "main.css": "/react-bottom-scroll-listener/static/css/main.bcfa67a1.css",
+    "main.js": "/react-bottom-scroll-listener/static/js/main.97b51a66.js",
     "index.html": "/react-bottom-scroll-listener/index.html",
-    "precache-manifest.59f3f2996610d7cd290cdc20d3d64c5f.js": "/react-bottom-scroll-listener/precache-manifest.59f3f2996610d7cd290cdc20d3d64c5f.js",
-    "service-worker.js": "/react-bottom-scroll-listener/service-worker.js",
-    "static/css/2.ca025b70.chunk.css.map": "/react-bottom-scroll-listener/static/css/2.ca025b70.chunk.css.map",
-    "static/css/main.1bfda0a1.chunk.css.map": "/react-bottom-scroll-listener/static/css/main.1bfda0a1.chunk.css.map"
-  }
+    "main.bcfa67a1.css.map": "/react-bottom-scroll-listener/static/css/main.bcfa67a1.css.map",
+    "main.97b51a66.js.map": "/react-bottom-scroll-listener/static/js/main.97b51a66.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.bcfa67a1.css",
+    "static/js/main.97b51a66.js"
+  ]
 }
