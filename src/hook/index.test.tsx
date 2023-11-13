@@ -58,6 +58,12 @@ describe('useBottomScrollListener', () => {
 
       expect(onBottom).toHaveBeenCalledTimes(1);
     });
+
+    it('shall invoke onBottom when there is no place to scroll with triggerOnNoScroll true', () => {
+      const onBottom = jest.fn();
+      renderHook(() => useBottomScrollListener(onBottom, { triggerOnNoScroll: true }));
+      expect(onBottom).toHaveBeenCalledTimes(1);
+    });
   });
 
   describe('given a ref it should use the given ref and', () => {
