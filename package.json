@@ -30,16 +30,12 @@
   ],
   "scripts": {
     "build": "microbundle-crl --no-compress --format modern,cjs",
-    "start": "microbundle-crl watch --no-compress --format modern,cjs",
-    "build:example": "vite build example",
-    "prepublish": "run-s build",
-    "test": "run-s test:unit test:lint test:build",
-    "test:build": "run-s build",
-    "test:lint": "eslint src --ext .ts,.tsx",
-    "test:unit": "vitest --run --coverage",
-    "test:watch": "vitest",
-    "predeploy": "cd example && yarn install && yarn run build",
-    "deploy": "gh-pages -d example/build"
+    "dev": "microbundle-crl watch --no-compress --format modern,cjs",
+    "build:example": "vite build example --base=/react-bottom-scroll-listener/",
+    "dev:example": "vite example",
+    "lint": "eslint src --ext .ts,.tsx",
+    "test": "vitest --run --coverage",
+    "prepublish": "run-s build"
   },
   "dependencies": {
     "lodash.debounce": "^4.0.8"

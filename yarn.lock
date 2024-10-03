@@ -8052,20 +8052,14 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "react-bottom-scroll-listener-example@workspace:example"
   dependencies:
-    react: "link:../node_modules/react"
-    react-bottom-scroll-listener: "link:.."
-    react-dom: "link:../node_modules/react-dom"
+    react: "npm:18.1"
+    react-bottom-scroll-listener: "workspace:*"
+    react-dom: "npm:18.1"
     react-toggle: "npm:^4.1.3"
   languageName: unknown
   linkType: soft
 
-"react-bottom-scroll-listener@link:..::locator=react-bottom-scroll-listener-example%40workspace%3Aexample":
-  version: 0.0.0-use.local
-  resolution: "react-bottom-scroll-listener@link:..::locator=react-bottom-scroll-listener-example%40workspace%3Aexample"
-  languageName: node
-  linkType: soft
-
-"react-bottom-scroll-listener@workspace:.":
+"react-bottom-scroll-listener@workspace:*, react-bottom-scroll-listener@workspace:.":
   version: 0.0.0-use.local
   resolution: "react-bottom-scroll-listener@workspace:."
   dependencies:
@@ -8106,11 +8100,17 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"react-dom@link:../node_modules/react-dom::locator=react-bottom-scroll-listener-example%40workspace%3Aexample":
-  version: 0.0.0-use.local
-  resolution: "react-dom@link:../node_modules/react-dom::locator=react-bottom-scroll-listener-example%40workspace%3Aexample"
+"react-dom@npm:18.1":
+  version: 18.1.0
+  resolution: "react-dom@npm:18.1.0"
+  dependencies:
+    loose-envify: "npm:^1.1.0"
+    scheduler: "npm:^0.22.0"
+  peerDependencies:
+    react: ^18.1.0
+  checksum: 10c0/aa6b9a134a5837db92ce7ba73cff76ec0137bc643a27f886557a43fb36cdc75e8d950bda05ca3eeb0292be38e7bd8f9fe5c2eecede76f4800d552008e030ad0d
   languageName: node
-  linkType: soft
+  linkType: hard
 
 "react-dom@npm:^18.2.0":
   version: 18.2.0
@@ -8194,11 +8194,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react@link:../node_modules/react::locator=react-bottom-scroll-listener-example%40workspace%3Aexample":
-  version: 0.0.0-use.local
-  resolution: "react@link:../node_modules/react::locator=react-bottom-scroll-listener-example%40workspace%3Aexample"
+"react@npm:18.1":
+  version: 18.1.0
+  resolution: "react@npm:18.1.0"
+  dependencies:
+    loose-envify: "npm:^1.1.0"
+  checksum: 10c0/20592b045e82ce809c0fd76c63cb70a11a5e0905a569a08874043097fc1eab759e3a7681d36b3246464e97bab021c4a0d6490ee2fb79c55d176b94e8890ad93a
   languageName: node
-  linkType: soft
+  linkType: hard
 
 "react@npm:^18.2.0":
   version: 18.2.0
@@ -8733,6 +8736,15 @@ __metadata:
   dependencies:
     xmlchars: "npm:^2.2.0"
   checksum: 10c0/3847b839f060ef3476eb8623d099aa502ad658f5c40fd60c105ebce86d244389b0d76fcae30f4d0c728d7705ceb2f7e9b34bb54717b6a7dbedaf5dad2d9a4b74
+  languageName: node
+  linkType: hard
+
+"scheduler@npm:^0.22.0":
+  version: 0.22.0
+  resolution: "scheduler@npm:0.22.0"
+  dependencies:
+    loose-envify: "npm:^1.1.0"
+  checksum: 10c0/db3ee5927e66048c97ab3565ee91d7ca5036e75f9600953c6ab2f6fb80938df95d72be8ac077329c2f3f1411d4d88e31cc9f83440540e5d4a881f6d84b0ed6a6
   languageName: node
   linkType: hard
 
