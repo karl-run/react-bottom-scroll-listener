@@ -1,3 +1,5 @@
+import { describe, it, vi, expect } from 'vitest';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { renderHook } from '@testing-library/react-hooks';
@@ -29,7 +31,7 @@ Object.defineProperty(HTMLElement.prototype, 'clientHeight', {
 describe('useBottomScrollListener', () => {
   describe('given no ref it should use the document and', () => {
     it('shall not invoke onBottom when body has not hit bottom', async () => {
-      const onBottom = jest.fn();
+      const onBottom = vi.fn();
 
       renderHook(() => useBottomScrollListener(onBottom, { offset: 0, debounce: 0 }));
 
@@ -44,7 +46,7 @@ describe('useBottomScrollListener', () => {
     });
 
     it('shall invoke onBottom when body is exactly at bottom', async () => {
-      const onBottom = jest.fn();
+      const onBottom = vi.fn();
 
       renderHook(() => useBottomScrollListener(onBottom, { offset: 0, debounce: 0 }));
 
@@ -60,7 +62,7 @@ describe('useBottomScrollListener', () => {
     });
 
     it('shall invoke onBottom when there is no place to scroll with triggerOnNoScroll true', () => {
-      const onBottom = jest.fn();
+      const onBottom = vi.fn();
       renderHook(() => useBottomScrollListener(onBottom, { triggerOnNoScroll: true }));
       expect(onBottom).toHaveBeenCalledTimes(1);
     });
@@ -77,15 +79,15 @@ describe('useBottomScrollListener', () => {
       (renderedNode as unknown as Record<string, unknown>).clientHeight = 600;
 
       let triggerScroll: (() => void) | null = null;
-      renderedNode.addEventListener = jest.fn().mockImplementation((_, cb) => {
+      renderedNode.addEventListener = vi.fn().mockImplementation((_, cb) => {
         triggerScroll = cb;
       });
 
       return { renderedNode, getTriggerScroll: () => triggerScroll };
     };
 
-    it('shall not invoke onBottom when container has not hit bottom', (done) => {
-      const onBottom = jest.fn();
+    it('shall not invoke onBottom when container has not hit bottom', () => {
+      const onBottom = vi.fn();
 
       const hook = renderHook(() => useBottomScrollListener<HTMLDivElement>(onBottom, { offset: 0, debounce: 0 }));
       const containerRef: React.RefObject<HTMLDivElement> = hook.result.current;
@@ -107,12 +109,10 @@ describe('useBottomScrollListener', () => {
       triggerScroll();
 
       expect(onBottom).not.toHaveBeenCalled();
-
-      done();
     });
 
-    it('shall invoke onBottom when container is exactly at bottom', (done) => {
-      const onBottom = jest.fn();
+    it('shall invoke onBottom when container is exactly at bottom', () => {
+      const onBottom = vi.fn();
 
       const hook = renderHook(() => useBottomScrollListener<HTMLDivElement>(onBottom, { offset: 0, debounce: 0 }));
       const containerRef: React.RefObject<HTMLDivElement> = hook.result.current;
@@ -135,8 +135,6 @@ describe('useBottomScrollListener', () => {
       triggerScroll();
 
       expect(onBottom).toHaveBeenCalledTimes(1);
-
-      done();
     });
   });
 });
