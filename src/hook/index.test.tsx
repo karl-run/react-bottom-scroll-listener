@@ -1,8 +1,8 @@
-import { describe, it, vi, expect } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 
-import React from 'react'
-import ReactDOM from 'react-dom'
 import { renderHook } from '@testing-library/react-hooks'
+import type React from 'react'
+import ReactDOM from 'react-dom'
 
 import useBottomScrollListener from './'
 
@@ -52,7 +52,6 @@ describe('useBottomScrollListener', () => {
 
       // window size is 768.
       // 768 + 432 = 1200, should scroll
-
       ;(document.documentElement as unknown as Record<string, unknown>).scrollHeight = 1200
       document.documentElement.scrollTop = 432
 
@@ -71,6 +70,8 @@ describe('useBottomScrollListener', () => {
   describe('given a ref it should use the given ref and', () => {
     const setupFakeContainer = (containerRef: React.RefObject<HTMLDivElement>) => {
       const div = document.createElement('div')
+
+      // biome-ignore lint: should be migrated to a more modern way of doing this
       const renderedNode: HTMLDivElement = ReactDOM.render(<div ref={containerRef} />, div) as unknown as HTMLDivElement
 
       ;(renderedNode as unknown as Record<string, unknown>).clientHeight = 600

@@ -1,14 +1,14 @@
-import { useCallback, useEffect, useRef, useMemo, RefObject } from 'react'
 import lodashDebounce from 'lodash.debounce'
+import { type RefObject, useCallback, useEffect, useMemo, useRef } from 'react'
 
 export type DebounceOptions = Parameters<typeof lodashDebounce>[2]
 
 const createCallback = (debounce: number, handleOnScroll: () => void, options: DebounceOptions): (() => void) => {
   if (debounce) {
     return lodashDebounce(handleOnScroll, debounce, options)
-  } else {
-    return handleOnScroll
   }
+
+  return handleOnScroll
 }
 
 /**
@@ -42,7 +42,10 @@ function useBottomScrollListener<T extends HTMLElement>(
     [options?.offset, options?.debounce, options?.debounceOptions, options?.triggerOnNoScroll],
   )
 
-  const debouncedOnBottom = useMemo(() => createCallback(debounce, onBottom, debounceOptions), [debounce, onBottom])
+  const debouncedOnBottom = useMemo(
+    () => createCallback(debounce, onBottom, debounceOptions),
+    [debounce, onBottom, debounceOptions],
+  )
   const containerRef = useRef<T>(null)
   const handleOnScroll = useCallback(() => {
     if (containerRef.current != null) {
@@ -63,7 +66,7 @@ function useBottomScrollListener<T extends HTMLElement>(
       }
     }
     // ref dependency needed for the tests, doesn't matter for normal execution
-  }, [offset, onBottom, containerRef.current])
+  }, [offset, debouncedOnBottom])
 
   useEffect((): (() => void) => {
     const ref: T | null = containerRef.current
@@ -84,7 +87,7 @@ function useBottomScrollListener<T extends HTMLElement>(
         window.removeEventListener('scroll', handleOnScroll)
       }
     }
-  }, [handleOnScroll, debounce])
+  }, [handleOnScroll, triggerOnNoScroll])
 
   return containerRef
 }
