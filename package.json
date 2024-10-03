@@ -43,8 +43,8 @@
   "scripts": {
     "build": "vite build && tsc",
     "dev": "vite build --watch",
-    "build:example": "vite build example --base=/react-bottom-scroll-listener/",
-    "dev:example": "vite example",
+    "build:example": "cd example && vite build --base=/react-bottom-scroll-listener/",
+    "dev:example": "cd example && vite",
     "lint": "biome check src",
     "test": "vitest --run --coverage",
     "prepublish": "run-s build"
