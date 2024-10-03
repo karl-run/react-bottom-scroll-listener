@@ -6,6 +6,7 @@
   "private": true,
   "type": "module",
   "dependencies": {
+    "prop-types": "^15.8.1",
     "react": "18.1",
     "react-bottom-scroll-listener": "workspace:*",
     "react-dom": "18.1",
@@ -16,5 +17,8 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "@types/prop-types": "^15"
+  }
 }

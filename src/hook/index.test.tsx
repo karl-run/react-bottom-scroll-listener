@@ -1,8 +1,7 @@
-import { describe, expect, it, vi } from 'vitest'
+import { afterEach, describe, expect, it, vi } from 'vitest'
 
-import { renderHook } from '@testing-library/react-hooks'
+import { cleanup, fireEvent, render, renderHook, screen } from '@testing-library/react'
 import type React from 'react'
-import ReactDOM from 'react-dom'
 
 import useBottomScrollListener from './'
 
@@ -37,7 +36,8 @@ describe('useBottomScrollListener', () => {
 
       // window size is 768.
       // 768 + 400 = 1168, should not scroll
-      ;(document.documentElement as unknown as Record<string, unknown>).scrollHeight = 1200
+      // @ts-expect-error scrollHeight is a mock property
+      document.documentElement.scrollHeight = 1200
       document.documentElement.scrollTop = 400
 
       window.dispatchEvent(new Event('scroll'))
@@ -52,7 +52,8 @@ describe('useBottomScrollListener', () => {
 
       // window size is 768.
       // 768 + 432 = 1200, should scroll
-      ;(document.documentElement as unknown as Record<string, unknown>).scrollHeight = 1200
+      // @ts-expect-error scrollHeight is a mock property
+      document.documentElement.scrollHeight = 1200
       document.documentElement.scrollTop = 432
 
       window.dispatchEvent(new Event('scroll'))
@@ -68,69 +69,50 @@ describe('useBottomScrollListener', () => {
   })
 
   describe('given a ref it should use the given ref and', () => {
-    const setupFakeContainer = (containerRef: React.RefObject<HTMLDivElement>) => {
-      const div = document.createElement('div')
+    const TestComponent = ({ onBottom }: { onBottom: () => void }) => {
+      const ref = useBottomScrollListener<HTMLDivElement>(onBottom, { offset: 0, debounce: 0 })
 
-      // biome-ignore lint: should be migrated to a more modern way of doing this
-      const renderedNode: HTMLDivElement = ReactDOM.render(<div ref={containerRef} />, div) as unknown as HTMLDivElement
-
-      ;(renderedNode as unknown as Record<string, unknown>).clientHeight = 600
-
-      let triggerScroll: (() => void) | null = null
-      renderedNode.addEventListener = vi.fn().mockImplementation((_, cb) => {
-        triggerScroll = cb
-      })
-
-      return { renderedNode, getTriggerScroll: () => triggerScroll }
+      return (
+        <div ref={ref} style={{ height: '600px' }} data-testid="container">
+          <h1>I am test</h1>
+        </div>
+      )
     }
+
+    afterEach(cleanup)
 
     it('shall not invoke onBottom when container has not hit bottom', () => {
       const onBottom = vi.fn()
+      render(<TestComponent onBottom={onBottom} />)
 
-      const hook = renderHook(() => useBottomScrollListener<HTMLDivElement>(onBottom, { offset: 0, debounce: 0 }))
-      const containerRef: React.RefObject<HTMLDivElement> = hook.result.current
-
-      const { renderedNode, getTriggerScroll } = setupFakeContainer(containerRef)
-
-      hook.rerender()
-
-      const triggerScroll = getTriggerScroll()
-      if (triggerScroll == null) {
-        throw new Error('Hook setup failed, callback never set')
-      }
+      const container: { clientHeight: number; scrollHeight: number; scrollTop: number } =
+        screen.getByTestId('container')
 
       // container size is 600.
       // 600 + 300 = 900, should not scroll
-      ;(renderedNode as unknown as Record<string, unknown>).scrollHeight = 1000
-      renderedNode.scrollTop = 300
+      container.clientHeight = 600
+      container.scrollHeight = 1000
+      container.scrollTop = 300
 
-      triggerScroll()
+      fireEvent.scroll(container as Element, { target: { scrollY: 300 } })
 
       expect(onBottom).not.toHaveBeenCalled()
     })
 
     it('shall invoke onBottom when container is exactly at bottom', () => {
       const onBottom = vi.fn()
+      render(<TestComponent onBottom={onBottom} />)
 
-      const hook = renderHook(() => useBottomScrollListener<HTMLDivElement>(onBottom, { offset: 0, debounce: 0 }))
-      const containerRef: React.RefObject<HTMLDivElement> = hook.result.current
-
-      const { renderedNode, getTriggerScroll } = setupFakeContainer(containerRef)
-
-      hook.rerender()
-
-      const triggerScroll = getTriggerScroll()
-      if (triggerScroll == null) {
-        throw new Error('Hook setup failed, callback never set')
-      }
+      const container: { clientHeight: number; scrollHeight: number; scrollTop: number } =
+        screen.getByTestId('container')
 
       // container size is 600.
       // 600 + 400 = 1000, should scroll
+      container.clientHeight = 600
+      container.scrollHeight = 1000
+      container.scrollTop = 400
 
-      ;(renderedNode as unknown as Record<string, unknown>).scrollHeight = 1000
-      renderedNode.scrollTop = 400
-
-      triggerScroll()
+      fireEvent.scroll(container as Element, { target: { scrollY: 400 } })
 
       expect(onBottom).toHaveBeenCalledTimes(1)
     })
