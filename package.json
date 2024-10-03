@@ -1,8 +1,17 @@
 {
   "name": "react-bottom-scroll-listener",
+  "type": "commonjs",
   "version": "5.1.0",
+  "author": "Karl J. Overå",
+  "license": "MIT",
   "description": "A simple React component that lets you listen for when you have scrolled to the bottom.",
-  "repository": "https://github.com/karl-run/react-bottom-scroll-listener",
+  "repository": {
+    "url": "git+https://github.com/karl-run/react-bottom-scroll-listener.git"
+  },
+  "homepage": "https://github.com/karl-run/react-bottom-scroll-listener#readme",
+  "bugs": {
+    "url": "https://github.com/karl-run/react-bottom-scroll-listener/issues"
+  },
   "keywords": [
     "react",
     "scrolling",
@@ -10,17 +19,19 @@
     "listener",
     "callback"
   ],
-  "author": "Karl J. Overå",
-  "license": "MIT",
-  "homepage": "https://github.com/karl-run/react-bottom-scroll-listener#readme",
-  "bugs": {
-    "url": "https://github.com/karl-run/react-bottom-scroll-listener/issues"
-  },
   "files": [
     "dist"
   ],
-  "main": "dist/index.js",
-  "module": "dist/index.modern.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/react-bottom-scroll-listener.mjs",
+      "require": "./dist/react-bottom-scroll-listener.js"
+    }
+  },
+  "main": "dist/react-bottom-scroll-listener.js",
+  "module": "dist/react-bottom-scroll-listener.mjs",
+  "types": "dist/index.d.ts",
   "source": "src/index.tsx",
   "packageManager": "yarn@4.5.0",
   "engines": {
@@ -30,11 +41,11 @@
     "example"
   ],
   "scripts": {
-    "build": "microbundle-crl --no-compress --format modern,cjs",
-    "dev": "microbundle-crl watch --no-compress --format modern,cjs",
+    "build": "vite build && tsc",
+    "dev": "vite",
     "build:example": "vite build example --base=/react-bottom-scroll-listener/",
     "dev:example": "vite example",
-    "lint": "eslint src --ext .ts,.tsx",
+    "lint": "biome check src",
     "test": "vitest --run --coverage",
     "prepublish": "run-s build"
   },
@@ -46,35 +57,22 @@
     "react-dom": "^16.0.0 || ^17.0.0 || ^18.0.0"
   },
   "devDependencies": {
+    "@biomejs/biome": "1.9.3",
     "@karl-run/prettier-config": "^1.0.1",
     "@testing-library/react-hooks": "^8.0.1",
     "@types/lodash.debounce": "^4.0.7",
+    "@types/node": "^22.7.4",
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
-    "@typescript-eslint/eslint-plugin": "^5.32.0",
-    "@typescript-eslint/parser": "^5.32.0",
     "@vitejs/plugin-react": "^4.3.2",
     "@vitest/coverage-v8": "2.1.2",
-    "babel-eslint": "^10.0.3",
-    "cross-env": "^7.0.2",
-    "eslint": "8.21.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-flowtype": "^8.0.3",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-jsx-a11y": "^6.6.1",
-    "eslint-plugin-node": "^11.0.0",
-    "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-promise": "^6.0.0",
-    "eslint-plugin-react": "^7.30.1",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "gh-pages": "^4.0.0",
     "jsdom": "^25.0.1",
-    "microbundle-crl": "^0.13.10",
     "npm-run-all": "^4.1.5",
     "prettier": "^3.3.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-test-renderer": "^18.0.2",
+    "typescript": "^5.6.2",
     "vite": "^5.4.8",
     "vitest": "^2.1.2"
   },

@@ -1,5 +1,5 @@
-import { MutableRefObject } from 'react'
-import useBottomScrollListener, { DebounceOptions } from '../hook'
+import type { MutableRefObject } from 'react'
+import useBottomScrollListener, { type DebounceOptions } from '../hook'
 
 export interface BottomScrollListenerProps {
   /**
@@ -57,8 +57,8 @@ const BottomScrollListener = ({
   })
 
   if (!children) return null
-  else if (typeof children === 'function') return children(optionalScrollContainerRef)
-  else return children
+  if (typeof children === 'function') return children(optionalScrollContainerRef)
+  return children
 }
 
 export default BottomScrollListener
