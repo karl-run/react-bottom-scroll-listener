@@ -1,15 +1,15 @@
-import { useCallback, useEffect, useRef, useMemo, RefObject } from 'react';
-import lodashDebounce from 'lodash.debounce';
+import { useCallback, useEffect, useRef, useMemo, RefObject } from 'react'
+import lodashDebounce from 'lodash.debounce'
 
-export type DebounceOptions = Parameters<typeof lodashDebounce>[2];
+export type DebounceOptions = Parameters<typeof lodashDebounce>[2]
 
 const createCallback = (debounce: number, handleOnScroll: () => void, options: DebounceOptions): (() => void) => {
   if (debounce) {
-    return lodashDebounce(handleOnScroll, debounce, options);
+    return lodashDebounce(handleOnScroll, debounce, options)
   } else {
-    return handleOnScroll;
+    return handleOnScroll
   }
-};
+}
 
 /**
  * @description
@@ -26,10 +26,10 @@ const createCallback = (debounce: number, handleOnScroll: () => void, options: D
 function useBottomScrollListener<T extends HTMLElement>(
   onBottom: () => void,
   options?: {
-    offset?: number;
-    debounce?: number;
-    debounceOptions?: DebounceOptions;
-    triggerOnNoScroll?: boolean;
+    offset?: number
+    debounce?: number
+    debounceOptions?: DebounceOptions
+    triggerOnNoScroll?: boolean
   },
 ): RefObject<T> {
   const { offset, triggerOnNoScroll, debounce, debounceOptions } = useMemo(
@@ -40,53 +40,53 @@ function useBottomScrollListener<T extends HTMLElement>(
       triggerOnNoScroll: options?.triggerOnNoScroll ?? false,
     }),
     [options?.offset, options?.debounce, options?.debounceOptions, options?.triggerOnNoScroll],
-  );
+  )
 
-  const debouncedOnBottom = useMemo(() => createCallback(debounce, onBottom, debounceOptions), [debounce, onBottom]);
-  const containerRef = useRef<T>(null);
+  const debouncedOnBottom = useMemo(() => createCallback(debounce, onBottom, debounceOptions), [debounce, onBottom])
+  const containerRef = useRef<T>(null)
   const handleOnScroll = useCallback(() => {
     if (containerRef.current != null) {
-      const scrollNode: T = containerRef.current;
-      const scrollContainerBottomPosition = Math.round(scrollNode.scrollTop + scrollNode.clientHeight);
-      const scrollPosition = Math.round(scrollNode.scrollHeight - offset);
+      const scrollNode: T = containerRef.current
+      const scrollContainerBottomPosition = Math.round(scrollNode.scrollTop + scrollNode.clientHeight)
+      const scrollPosition = Math.round(scrollNode.scrollHeight - offset)
 
       if (scrollPosition <= scrollContainerBottomPosition) {
-        debouncedOnBottom();
+        debouncedOnBottom()
       }
     } else {
-      const scrollNode: Element = document.scrollingElement || document.documentElement;
-      const scrollContainerBottomPosition = Math.round(scrollNode.scrollTop + window.innerHeight);
-      const scrollPosition = Math.round(scrollNode.scrollHeight - offset);
+      const scrollNode: Element = document.scrollingElement || document.documentElement
+      const scrollContainerBottomPosition = Math.round(scrollNode.scrollTop + window.innerHeight)
+      const scrollPosition = Math.round(scrollNode.scrollHeight - offset)
 
       if (scrollPosition <= scrollContainerBottomPosition) {
-        debouncedOnBottom();
+        debouncedOnBottom()
       }
     }
     // ref dependency needed for the tests, doesn't matter for normal execution
-  }, [offset, onBottom, containerRef.current]);
+  }, [offset, onBottom, containerRef.current])
 
   useEffect((): (() => void) => {
-    const ref: T | null = containerRef.current;
+    const ref: T | null = containerRef.current
     if (ref != null) {
-      ref.addEventListener('scroll', handleOnScroll);
+      ref.addEventListener('scroll', handleOnScroll)
     } else {
-      window.addEventListener('scroll', handleOnScroll);
+      window.addEventListener('scroll', handleOnScroll)
     }
 
     if (triggerOnNoScroll) {
-      handleOnScroll();
+      handleOnScroll()
     }
 
     return () => {
       if (ref != null) {
-        ref.removeEventListener('scroll', handleOnScroll);
+        ref.removeEventListener('scroll', handleOnScroll)
       } else {
-        window.removeEventListener('scroll', handleOnScroll);
+        window.removeEventListener('scroll', handleOnScroll)
       }
-    };
-  }, [handleOnScroll, debounce]);
+    }
+  }, [handleOnScroll, debounce])
 
-  return containerRef;
+  return containerRef
 }
 
-export default useBottomScrollListener;
+export default useBottomScrollListener

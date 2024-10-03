@@ -1,31 +1,31 @@
-import { MutableRefObject } from 'react';
-import useBottomScrollListener, { DebounceOptions } from '../hook';
+import { MutableRefObject } from 'react'
+import useBottomScrollListener, { DebounceOptions } from '../hook'
 
 export interface BottomScrollListenerProps {
   /**
    * Required callback that will be invoked when scrolled to bottom
    */
-  onBottom: () => void;
+  onBottom: () => void
 
   /**
    * Offset from bottom of page in pixels. E.g. 300 will trigger onBottom 300px from the bottom of the page
    */
-  offset?: number;
+  offset?: number
 
   /**
    * Optional debounce in milliseconds, defaults to 200ms
    */
-  debounce?: number;
+  debounce?: number
 
   /**
    * Options passed to lodash.debounce, see https://lodash.com/docs/4.17.15#debounce
    */
-  debounceOptions?: DebounceOptions;
+  debounceOptions?: DebounceOptions
 
   /**
    * Triggers the onBottom callback when the page has no scrollbar, defaults to false
    */
-  triggerOnNoScroll?: boolean;
+  triggerOnNoScroll?: boolean
 
   /**
    *   Optional children to be rendered.
@@ -33,9 +33,7 @@ export interface BottomScrollListenerProps {
    *   If children passed is a function, that function will be passed a React.RefObject<HTMLElement>
    *   that ref shall be passed to a child tag that will be used for the scrolling container.
    * */
-  children?:
-    | JSX.Element
-    | (<T>(ref: ((instance: T | null) => void) | MutableRefObject<T | null> | null) => JSX.Element);
+  children?: JSX.Element | (<T>(ref: ((instance: T | null) => void) | MutableRefObject<T | null> | null) => JSX.Element)
 }
 
 /**
@@ -56,11 +54,11 @@ const BottomScrollListener = ({
     debounce,
     debounceOptions,
     triggerOnNoScroll,
-  });
+  })
 
-  if (!children) return null;
-  else if (typeof children === 'function') return children(optionalScrollContainerRef);
-  else return children;
-};
+  if (!children) return null
+  else if (typeof children === 'function') return children(optionalScrollContainerRef)
+  else return children
+}
 
-export default BottomScrollListener;
+export default BottomScrollListener
