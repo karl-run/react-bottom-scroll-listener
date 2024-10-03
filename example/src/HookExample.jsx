@@ -4,7 +4,7 @@ import { useBottomScrollListener } from 'react-bottom-scroll-listener'
 
 const HookExample = ({ alertOnBottom }) => {
   const handleOnDocumentBottom = useCallback(() => {
-    console.log('I am at bottom! ' + Math.round(performance.now()))
+    console.log(`I am at bottom! ${Math.round(performance.now())}`)
 
     if (alertOnBottom) {
       alert('Bottom hit!')
@@ -12,7 +12,7 @@ const HookExample = ({ alertOnBottom }) => {
   }, [alertOnBottom])
 
   const handleContainerOnBottom = useCallback(() => {
-    console.log('I am at bottom in optional container! ' + Math.round(performance.now()))
+    console.log(`I am at bottom in optional container! ${Math.round(performance.now())}`)
 
     if (alertOnBottom) {
       alert('Bottom of this container hit!')

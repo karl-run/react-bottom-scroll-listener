@@ -12,14 +12,24 @@ const App = () => {
     <div>
       <header className="bg-purple-700 p-2 flex gap-3 flex-col md:flex-row justify-between m-2 rounded text-white items-center border-2 border-purple-950">
         <h1 className="text-xl">react-bottom-scroll-listener</h1>
-        <div className="flex gap-6">
-          <label htmlFor="alert-state" className="flex justify-center gap-3">
+        <div className="flex gap-6 pt-2">
+          <label
+            htmlFor="alert-state"
+            className="flex justify-center gap-3 flex-col md:flex-row items-center md:items-start"
+          >
             <span>Use {alertOnBottom ? 'alert dialog' : 'console.log'}</span>
-            <Toggle id="alert-state" checked={alertOnBottom} onChange={() => setAlertOnBottom((b) => !b)} />
+            <div>
+              <Toggle id="alert-state" checked={alertOnBottom} onChange={() => setAlertOnBottom((b) => !b)} />
+            </div>
           </label>
-          <label htmlFor="use-hook-state" className="flex justify-center gap-3">
+          <label
+            htmlFor="use-hook-state"
+            className="flex justify-center gap-3 flex-col md:flex-row items-center md:items-start"
+          >
             <span>Use {hookExample ? 'hook' : 'component'}</span>
-            <Toggle id="use-hook-state" checked={hookExample} onChange={() => setHookExample((b) => !b)} />
+            <div>
+              <Toggle id="use-hook-state" checked={hookExample} onChange={() => setHookExample((b) => !b)} />
+            </div>
           </label>
         </div>
       </header>
