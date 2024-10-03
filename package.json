@@ -25,9 +25,13 @@
   "engines": {
     "node": ">=10"
   },
+  "workspaces": [
+    "example"
+  ],
   "scripts": {
     "build": "microbundle-crl --no-compress --format modern,cjs",
     "start": "microbundle-crl watch --no-compress --format modern,cjs",
+    "build:example": "vite build example",
     "prepublish": "run-s build",
     "test": "run-s test:unit test:lint test:build",
     "test:build": "run-s build",
@@ -51,6 +55,7 @@
     "@types/react-dom": "^18.0.6",
     "@typescript-eslint/eslint-plugin": "^5.32.0",
     "@typescript-eslint/parser": "^5.32.0",
+    "@vitejs/plugin-react": "^4.3.2",
     "@vitest/coverage-v8": "2.1.2",
     "babel-eslint": "^10.0.3",
     "cross-env": "^7.0.2",

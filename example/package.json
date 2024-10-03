@@ -8,7 +8,6 @@
     "react": "link:../node_modules/react",
     "react-bottom-scroll-listener": "link:..",
     "react-dom": "link:../node_modules/react-dom",
-    "react-scripts": "link:../node_modules/react-scripts",
     "react-toggle": "^4.1.3"
   },
   "scripts": {

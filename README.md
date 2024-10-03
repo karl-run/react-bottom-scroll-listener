@@ -4,11 +4,11 @@ A simple **React hook** and **React component** that lets you listen for when yo
 
 ### Window
 
-![Example](./example.gif)
+![Example](./docs/example.gif)
 
 ### Container
 
-![Example](./example_inner.gif)
+![Example](./docs/example_inner.gif)
 
 ## Installation
 
