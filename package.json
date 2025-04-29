@@ -33,7 +33,7 @@
   "module": "dist/react-bottom-scroll-listener.mjs",
   "types": "dist/index.d.ts",
   "source": "src/index.tsx",
-  "packageManager": "yarn@4.5.0",
+  "packageManager": "yarn@4.9.1",
   "engines": {
     "node": ">=10"
   },
