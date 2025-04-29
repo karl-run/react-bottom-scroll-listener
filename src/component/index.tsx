@@ -1,4 +1,4 @@
-import type { MutableRefObject } from 'react'
+import type { MutableRefObject, JSX } from 'react'
 import useBottomScrollListener, { type DebounceOptions } from '../hook'
 
 export interface BottomScrollListenerProps {

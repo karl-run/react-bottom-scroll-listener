@@ -31,7 +31,7 @@ function useBottomScrollListener<T extends HTMLElement>(
     debounceOptions?: DebounceOptions
     triggerOnNoScroll?: boolean
   },
-): RefObject<T> {
+): RefObject<T | null> {
   const { offset, triggerOnNoScroll, debounce, debounceOptions } = useMemo(
     () => ({
       offset: options?.offset ?? 0,
