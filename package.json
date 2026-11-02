@@ -20,7 +20,8 @@
     "callback"
   ],
   "files": [
-    "dist"
+    "dist",
+    "LICENSE"
   ],
   "exports": {
     ".": {
